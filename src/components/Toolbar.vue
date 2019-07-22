@@ -9,42 +9,97 @@
     </head>
     <v-content>
       <v-container fluid>
+        <component :is="selectedComponent"></component>
         <router-view></router-view>
       </v-container>
     </v-content>
 
-    <v-card  flat>
+    <v-card flat>
       <!--      <div class="headline text-xs-center pa-5">Active: {{ bottomNav }}</div>-->
       <v-bottom-nav
         :active.sync="bottomNav"
         :value="true"
         absolute
-        color="transparent"
+        color="grey lighten-2"
+        height="85px"
       >
-        <v-btn color="pink darken-3" flat value="lunch">
+        <v-btn
+          @click="selectedComponent = 'Lunch'"
+          color="red darken-1"
+          flat
+          value="lunch"
+        >
           <span>Lunch</span>
           <i class="fas fa-bread-slice fa-2x"></i>
         </v-btn>
 
-        <v-btn color="deep-purple darken-3" flat value="dinner">
+        <v-btn
+          @click="selectedComponent = 'Dinner'"
+          color="deep-purple darken-1"
+          flat
+          value="dinner"
+        >
           <span>Dinner</span>
           <i class="fas fa-utensils fa-2x"></i>
         </v-btn>
 
-        <v-btn color="light-green darken-3" flat value="drinks">
+        <v-btn
+          @click="selectedComponent = 'Drinks'"
+          color="light-green darken-1"
+          flat
+          value="drinks"
+        >
           <span>Drinks</span>
           <i class="material-icons" style="font-size: 2em">
             local_drink
           </i>
         </v-btn>
-        <v-btn color="purple darken-3" flat value="wine">
+        <v-btn
+          @click="selectedComponent = 'Wine'"
+          color="purple darken-1"
+          flat
+          value="wine"
+        >
           <span>Wine</span>
           <i class="fas fa-wine-glass fa-2x"></i>
+        </v-btn>
+        <v-btn
+          @click="selectedComponent = 'Settings'"
+          color="light-blue darken-1"
+          flat
+          value="settings"
+        >
+          <span>Settings</span>
+          <i class="fas fa-cog fa-2x"></i>
         </v-btn>
       </v-bottom-nav>
     </v-card>
   </v-app>
 </template>
+
+<script>
+import Settings from "./Settings";
+import Dinner from "./Dinner";
+import Drinks from "./Drinks";
+import Lunch from "./Lunch";
+import Wine from "./Wine";
+
+export default {
+  data() {
+    return {
+      show: true,
+      selectedComponent: ""
+    };
+  },
+  components: {
+    Settings,
+    Dinner,
+    Drinks,
+    Lunch,
+    Wine
+  }
+};
+</script>
 
 <style>
 span {
