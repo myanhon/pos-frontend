@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Grid :products="products"></Grid>
+    <Grid :products="products" name="Wine"></Grid>
   </v-app>
 </template>
 

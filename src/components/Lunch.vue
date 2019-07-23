@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Grid :category="category"></Grid>
+    <Grid :category="category" name="Lunch"></Grid>
   </v-app>
 </template>
 
