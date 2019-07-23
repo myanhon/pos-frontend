@@ -20,12 +20,12 @@
         :active.sync="bottomNav"
         :value="true"
         absolute
-        color="grey lighten-2"
         height="85px"
+        dark
       >
         <v-btn
           @click="selectedComponent = 'Lunch'"
-          color="red darken-1"
+          color="red lighten-1"
           flat
           value="lunch"
         >
@@ -35,7 +35,7 @@
 
         <v-btn
           @click="selectedComponent = 'Dinner'"
-          color="deep-purple darken-1"
+          color="purple lighten-1"
           flat
           value="dinner"
         >
@@ -45,7 +45,7 @@
 
         <v-btn
           @click="selectedComponent = 'Drinks'"
-          color="light-green darken-1"
+          color="green lighten-1"
           flat
           value="drinks"
         >
@@ -56,7 +56,7 @@
         </v-btn>
         <v-btn
           @click="selectedComponent = 'Wine'"
-          color="purple darken-1"
+          color="lime lighten-1"
           flat
           value="wine"
         >
