@@ -1,3 +1,27 @@
 <template>
-  <h1>Lunch</h1>
+  <v-app>
+    <Grid :category="category"></Grid>
+  </v-app>
 </template>
+
+<script>
+import Grid from "./Grid";
+
+export default {
+  data() {
+    return {
+      category: [
+        {
+          name: "Meat"
+        },
+        {
+          name: "Vegetable"
+        }
+      ]
+    };
+  },
+  components: {
+    Grid
+  }
+};
+</script>
