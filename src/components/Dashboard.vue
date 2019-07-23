@@ -1,5 +1,5 @@
 <template>
-  <h1>SETTINGS</h1>
+  <h1>DashBoard</h1>
 </template>
 
 <style>

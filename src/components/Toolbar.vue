@@ -64,13 +64,15 @@
           <i class="fas fa-wine-glass fa-2x"></i>
         </v-btn>
         <v-btn
-          @click="selectedComponent = 'Settings'"
+          @click="selectedComponent = 'Dashboard'"
           color="light-blue darken-1"
           flat
-          value="settings"
+          value="dashboard"
         >
-          <span>Settings</span>
-          <i class="fas fa-cog fa-2x"></i>
+          <span>Dashboard</span>
+          <i class="material-icons" style="font-size: 2em">
+            dashboard
+          </i>
         </v-btn>
       </v-bottom-nav>
     </v-card>
@@ -78,7 +80,7 @@
 </template>
 
 <script>
-import Settings from "./Settings";
+import Dashboard from "./Dashboard";
 import Dinner from "./Dinner";
 import Drinks from "./Drinks";
 import Lunch from "./Lunch";
@@ -92,7 +94,7 @@ export default {
     };
   },
   components: {
-    Settings,
+    Dashboard,
     Dinner,
     Drinks,
     Lunch,
