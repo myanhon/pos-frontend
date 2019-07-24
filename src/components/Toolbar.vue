@@ -89,7 +89,7 @@ import Wine from "./Wine";
 export default {
   data() {
     return {
-      show: true,
+      bottomNav: 3,
       selectedComponent: ""
     };
   },
@@ -103,7 +103,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 span {
   font-size: 20px;
 }

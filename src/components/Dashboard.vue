@@ -1,8 +1,13 @@
 <template>
-  <h1>DashBoard</h1>
+  <v-app>
+    <h1>Dashboard</h1>
+  </v-app>
 </template>
 
-<style>
+<script>
+export default {};
+</script>
+<style scoped>
 h1 {
   color: red;
 }

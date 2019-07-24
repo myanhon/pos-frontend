@@ -17,3 +17,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.container {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+</style>

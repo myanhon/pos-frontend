@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Grid :products="products" name="Wine"></Grid>
+    <Grid :category="category" :products="products" name="Wine"></Grid>
   </v-app>
 </template>
 
@@ -19,7 +19,8 @@ export default {
           price: 3
         },
         { name: "Blue Wine", price: 10 }
-      ]
+      ],
+      category: [{ name: "Alcohol" }, { name: "Soda" }]
     };
   },
   components: {
