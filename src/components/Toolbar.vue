@@ -15,7 +15,6 @@
     </v-content>
 
     <v-card flat>
-      <!--      <div class="headline text-xs-center pa-5">Active: {{ bottomNav }}</div>-->
       <v-bottom-nav
         :active.sync="bottomNav"
         :value="true"
@@ -25,7 +24,7 @@
       >
         <v-btn
           @click="selectedComponent = 'Lunch'"
-          color="red lighten-1"
+          color="orange lighten-1"
           flat
           value="lunch"
         >

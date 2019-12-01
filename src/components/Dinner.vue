@@ -12,12 +12,14 @@ export default {
     return {
       category: [
         {
-          name: "Meat"
+          drinks: [{name:"Tea"},{name:"Soda"}]
         },
         {
-          name: "Vegetable"
+          dinner: [{name:"Meat"},{name:"Soda"},{name:"Alcohol"},{name:"Wine"}]
         },
-        { name: "Fish" }
+        {
+          lunch: [{name:"Meat"},{name:"Soda"}]
+        }
       ]
     };
   },

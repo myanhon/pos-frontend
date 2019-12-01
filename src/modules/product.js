@@ -1,21 +1,37 @@
 import axios from "axios";
+const API = require("../../config/API");
 
-const state = {};
+const state = {
+  productArray: null
+};
 
-const mutations = {};
-
-const actions = {
-  getAllProducts({ commit }, productData) {
-    axios.get("http://localhost:3000/api/todos/test").then(response => {
-      console.log(response);
-    });
+const mutations = {
+  SAVE_ALL_PRODUCTS(state, data) {
+    state.productArray = data;
   }
 };
 
-const getters = {};
+const actions = {
+  fetchAllProducts({ commit }) {
+    axios
+      .get(API.product.GET_ALL_PRODUCTS_URL)
+      .then(response => {
+        commit("SAVE_ALL_PRODUCTS", response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+};
+
+const getters = {
+  getAllProducts(state) {
+    return state.productArray;
+  }
+};
 
 export default {
-  namespaced: "product",
+  namespaced: "Product",
   state,
   mutations,
   actions,
