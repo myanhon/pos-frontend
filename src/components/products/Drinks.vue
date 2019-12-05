@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Grid from "./Grid";
+import Grid from "../Grid";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {

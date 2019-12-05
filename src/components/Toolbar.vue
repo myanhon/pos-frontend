@@ -80,10 +80,10 @@
 
 <script>
 import Dashboard from "./Dashboard";
-import Dinner from "./Dinner";
-import Drinks from "./Drinks";
-import Lunch from "./Lunch";
-import Wine from "./Wine";
+import Dinner from "./products/Dinner";
+import Drinks from "./products/Drinks";
+import Lunch from "./products/Lunch";
+import Wine from "./products/Wine";
 
 export default {
   data() {

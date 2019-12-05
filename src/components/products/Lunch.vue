@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <Grid :category="category" name="Lunch"></Grid>
+<!--    <Grid :category="category" name="Lunch"></Grid>-->
   </v-app>
 </template>
 
 <script>
-import Grid from "./Grid";
+import Grid from "../Grid";
 
 export default {
   data() {
