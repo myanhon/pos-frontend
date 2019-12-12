@@ -5,7 +5,7 @@ import Drinks from "./components/products/Drinks";
 import Lunch from "./components/products/Lunch";
 import Wine from "./components/products/Wine";
 // import Login from "./components/user/Login";
-
+import Register from "./components/user/Register";
 Vue.use(Router);
 
 export default new Router({
@@ -18,6 +18,11 @@ export default new Router({
     // },
     {
       path: "/",
+      name: "Register",
+      component: Register
+    },
+    {
+      path: "/dinner",
       name: "Dinner",
       component: Dinner
     },
