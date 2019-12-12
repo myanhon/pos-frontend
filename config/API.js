@@ -1,7 +1,9 @@
-const backEndUrl = "http://localhost:3000";
+const serverUrl = "http://localhost:3000";
+const authUrl = "http://localhost:4000";
 
 const apiUrl = {
-  product: { GET_ALL_PRODUCTS_URL: backEndUrl + "/api/products" }
+  product: { FETCH_ALL_PRODUCTS_API: serverUrl + "/api/products" },
+  user: {FETCH_JWT_API:authUrl+"/user/signup"}
 };
 
 module.exports = apiUrl;

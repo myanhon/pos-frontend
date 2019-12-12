@@ -1,109 +1,40 @@
 <template>
-  <v-app>
-    <head>
-      <link
-        href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
-        rel="stylesheet"
-      />
-      <title>POS</title>
-    </head>
-    <v-content>
-      <v-container fluid>
-        <component :is="selectedComponent"></component>
-        <router-view></router-view>
-      </v-container>
-    </v-content>
+  <v-bottom-navigation id="footer" dark shift>
+    <v-btn>
+      <span>Video</span>
+      <v-icon>mdi-television-play</v-icon>
+    </v-btn>
 
-    <v-card flat>
-      <v-bottom-nav
-        :active.sync="bottomNav"
-        :value="true"
-        absolute
-        height="85px"
-        dark
-      >
-        <v-btn
-          @click="selectedComponent = 'Lunch'"
-          color="orange lighten-1"
-          flat
-          value="lunch"
-        >
-          <span>Lunch</span>
-          <i class="fas fa-bread-slice fa-2x"></i>
-        </v-btn>
+    <v-btn>
+      <span>Music</span>
+      <v-icon>music_note</v-icon>
+    </v-btn>
 
-        <v-btn
-          @click="selectedComponent = 'Dinner'"
-          color="purple lighten-1"
-          flat
-          value="dinner"
-        >
-          <span>Dinner</span>
-          <i class="fas fa-utensils fa-2x"></i>
-        </v-btn>
+    <v-btn>
+      <span>Book</span>
+      <v-icon>mdi-book</v-icon>
+    </v-btn>
 
-        <v-btn
-          @click="selectedComponent = 'Drinks'"
-          color="green lighten-1"
-          flat
-          value="drinks"
-        >
-          <span>Drinks</span>
-          <i class="material-icons" style="font-size: 2em">
-            local_drink
-          </i>
-        </v-btn>
-        <v-btn
-          @click="selectedComponent = 'Wine'"
-          color="lime lighten-1"
-          flat
-          value="wine"
-        >
-          <span>Wine</span>
-          <i class="fas fa-wine-glass fa-2x"></i>
-        </v-btn>
-        <v-btn
-          @click="selectedComponent = 'Dashboard'"
-          color="light-blue darken-1"
-          flat
-          value="dashboard"
-        >
-          <span>Dashboard</span>
-          <i class="material-icons" style="font-size: 2em">
-            dashboard
-          </i>
-        </v-btn>
-      </v-bottom-nav>
-    </v-card>
-  </v-app>
+    <v-btn>
+      <span>Image</span>
+      <v-icon>mdi-image</v-icon>
+    </v-btn>
+  </v-bottom-navigation>
 </template>
 
 <script>
-import Dashboard from "./Dashboard";
-import Dinner from "./products/Dinner";
-import Drinks from "./products/Drinks";
-import Lunch from "./products/Lunch";
-import Wine from "./products/Wine";
-
 export default {
-  data() {
-    return {
-      bottomNav: 3,
-      selectedComponent: ""
-    };
-  },
-  components: {
-    Dashboard,
-    Dinner,
-    Drinks,
-    Lunch,
-    Wine
-  }
+  data: () => ({
+    //
+  })
 };
 </script>
 
 <style scoped>
 span {
   font-size: 20px;
+}
+#footer {
+  position: fixed;
 }
 </style>

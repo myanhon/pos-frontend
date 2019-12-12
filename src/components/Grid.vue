@@ -1,96 +1,41 @@
 <template>
-  <v-container fill-height fluid grid-list-md text-xs-center>
-    <v-layout row wrap>
-      <v-flex s9>
-        <v-card light color="primary">
-          <v-layout row wrap>
-            <v-flex>
-              <div>
-                <v-tabs v-model="active" centered>
-                  <v-tabs-items v-model="tab">
-                    <v-card flat>
-                      <div v-show="currentTab === 0">
-                        <v-card max-height="1200" max-width="1352">
-                          <v-container height="0" fluid grid-list-md>
-                            <v-layout>
-<!--                              <v-flex-->
-<!--                                v-for="product in products"-->
-<!--                                :key="product.id"-->
-<!--                                v-bind="{ [`xs${product.flex}`]: true }"-->
-<!--                              >-->
-<!--                                <v-card>-->
-<!--                                  <v-img-->
-<!--                                    :src="product.src"-->
-<!--                                    class="white&#45;&#45;text"-->
-<!--                                    height="200px"-->
-<!--                                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"-->
-<!--                                  >-->
-<!--                                    <v-card-title-->
-<!--                                      class="fill-height align-end"-->
-<!--                                    ></v-card-title>-->
-<!--                                  </v-img>-->
+  <v-container class="grey lighten-5">
+    <v-row no-gutters>
+      <v-col class="box1" sm="6" md="5" lg="9">
+        <v-img
+          src="https://www.horecagoedkoop.nl/media/catalog/product/cache/5a646e18d8b689d94099823e11c671ad/c/o/coca-cola-nl-blik.jpg"
+          lazy-src="https://picsum.photos/id/11/10/6"
+          aspect-ratio="1"
+          class="grey lighten-2"
+          max-width="200"
+          max-height="200"
+        ></v-img>
+        <p>Price: 2.50</p>
 
-<!--                                  <v-card-actions>-->
-<!--                                    <span>-->
-<!--                                      {{ product.title }} ${{-->
-<!--                                        product.price-->
-<!--                                      }}</span-->
-<!--                                    >-->
-<!--                                  </v-card-actions>-->
-<!--                                </v-card>-->
-<!--                              </v-flex>-->
-                            </v-layout>
-                          </v-container>
-                        </v-card>
-                      </div>
-                    </v-card>
-                  </v-tabs-items>
-                </v-tabs>
-              </div>
-            </v-flex>
-          </v-layout>
+
+      </v-col>
+      <v-col class="box2" sm="6" md="5" offset-md="2" lg="3" offset-lg="0">
+        <v-card class="pa-2" outlined tile>
+          .col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0
         </v-card>
-      </v-flex>
-      <v-flex xs3>
-        <v-card dark color="primary">
-          <v-card-text class="px-0">Order Details</v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <style scoped>
-.card {
-  padding: 12px;
+.box1 {
+  background-color: red;
 }
-.v-tabs__container {
-  height: 0px !important;
-}
-.v-tabs__item:not(.v-tabs__item--active) {
-  opacity: 1 !important;
-}
-.v-card__text {
-  padding: 16px;
-  width: 100%;
-  color: white;
+.box2 {
+  background-color: blue;
 }
 </style>
 
 <script>
 export default {
-  data() {
-    return {
-      active: null,
-      currentTab: 0,
-      tab: null
-    };
-  },
-  props: {
-    products: {
-      type: Array,
-      required: false
-    }
-  }
+  data: () => ({
+    //
+  })
 };
 </script>

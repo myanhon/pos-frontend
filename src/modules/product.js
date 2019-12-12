@@ -14,7 +14,7 @@ const mutations = {
 const actions = {
   fetchAllProducts({ commit }) {
     axios
-      .get(API.product.GET_ALL_PRODUCTS_URL)
+      .get(API.product.FETCH_ALL_PRODUCTS_API)
       .then(response => {
         commit("SAVE_ALL_PRODUCTS", response.data);
       })

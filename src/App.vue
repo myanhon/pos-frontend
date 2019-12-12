@@ -1,26 +1,22 @@
 <template>
   <v-app>
-    <router-view></router-view>
-    <toolbar> </toolbar>
+    <Grid></Grid>
+    <Toolbar fixed></Toolbar>
   </v-app>
 </template>
 
 <script>
+import Grid from "./components/Grid";
 import Toolbar from "./components/Toolbar";
-
 export default {
-  data() {
-    return {};
-  },
+  name: "App",
+
+  data: () => ({
+    //
+  }),
   components: {
-    toolbar: Toolbar
+    Toolbar,
+    Grid
   }
 };
 </script>
-
-<style>
-.container {
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-}
-</style>
