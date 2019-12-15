@@ -3,20 +3,16 @@ const API = require("../../config/API");
 
 const state = {
   status: null,
-  accessToken: null,
-  refreshToken: null
+  accessToken: localStorage.getItem("accessToken"),
+  refreshToken: localStorage.getItem("refreshToken")
 };
 
 const mutations = {
   AUTH_REQUEST(state) {
     state.status = "loading";
   },
-  AUTH_SUCCESS(state, payload) {
-    console.log("mutation acesstoken:", payload.accessToken);
-    console.log("mutation refreshtoken:", payload.refreshToken);
+  AUTH_SUCCESS(state) {
     state.status = "success";
-    state.accessToken = payload.accessToken;
-    state.refreshToken = payload.refreshToken;
   },
   AUTH_ERROR(state) {
     state.status = "error";
@@ -36,24 +32,25 @@ const actions = {
         password: user.password
       })
       .then(response => {
-        console.log("before auth_sucess", response.data.refreshToken);
-        commit("AUTH_SUCCESS", response.data);
+        console.log("before auth_sucess", response.data);
+        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+        commit("AUTH_SUCCESS");
       })
       .catch(error => {
         commit("AUTH_ERROR");
         console.log(error.response);
       });
+  },
+  logout({ commit }) {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    delete axios.defaults.headers.common["Authorization"];
+    commit("LOGOUT");
   }
 };
 
-const getters = {
-  getAccessToken(state){
-    return state.accessToken;
-  },
-  getRefreshToken(state) {
-    return state.refreshToken;
-  }
-};
+const getters = {};
 
 export default {
   namespaced: "User",

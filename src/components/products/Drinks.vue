@@ -2,6 +2,7 @@
   <v-app>
     <!--        <Grid :products="products" name="Drinks"></Grid>-->
     <!--    {{ getAllProducts }}-->
+    <h1>DRINKS</h1>
   </v-app>
 </template>
 
