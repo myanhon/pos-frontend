@@ -1,24 +1,59 @@
 import axios from "axios";
 const API = require("../../config/API");
 
-const state = {};
+const state = {
+  status: null,
+  accessToken: null,
+  refreshToken: null
+};
 
-const mutations = {};
+const mutations = {
+  AUTH_REQUEST(state) {
+    state.status = "loading";
+  },
+  AUTH_SUCCESS(state, payload) {
+    console.log("mutation acesstoken:", payload.accessToken);
+    console.log("mutation refreshtoken:", payload.refreshToken);
+    state.status = "success";
+    state.accessToken = payload.accessToken;
+    state.refreshToken = payload.refreshToken;
+  },
+  AUTH_ERROR(state) {
+    state.status = "error";
+  },
+  LOGOUT(state) {
+    state.status = null;
+  }
+};
 
 const actions = {
-  fetchJWT() {
+  register({ commit }, user) {
+    commit("AUTH_REQUEST");
     axios
-      .get(API.user.FETCH_JWT_API)
+      .post(API.user.REGISTER_API, {
+        name: user.name,
+        email: user.email,
+        password: user.password
+      })
       .then(response => {
-        axios.defaults.headers.common["x-csrf-token"] = response.data.csrfToken;
+        console.log("before auth_sucess", response.data.refreshToken);
+        commit("AUTH_SUCCESS", response.data);
       })
       .catch(error => {
+        commit("AUTH_ERROR");
         console.log(error.response);
       });
   }
 };
 
-const getters = {};
+const getters = {
+  getAccessToken(state){
+    return state.accessToken;
+  },
+  getRefreshToken(state) {
+    return state.refreshToken;
+  }
+};
 
 export default {
   namespaced: "User",

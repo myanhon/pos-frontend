@@ -11,10 +11,19 @@
               <v-card-text>
                 <v-form>
                   <v-text-field
+                    label="Name"
+                    name="name"
+                    prepend-icon="person"
+                    type="text"
+                    v-model="data.name"
+                  />
+
+                  <v-text-field
                     label="E-mail"
                     name="login"
                     prepend-icon="person"
                     type="text"
+                    v-model="data.email"
                   />
 
                   <v-text-field
@@ -23,12 +32,19 @@
                     name="password"
                     prepend-icon="lock"
                     type="password"
+                    v-model="data.password"
                   />
+                  <v-row
+                    style="padding-bottom: 2%"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-btn @click="register(data)" color="primary"
+                      >Register</v-btn
+                    >
+                  </v-row>
                 </v-form>
               </v-card-text>
-              <v-row style="padding-bottom: 2%" align="center" justify="center">
-                <v-btn color="primary">Login</v-btn>
-              </v-row>
             </v-card>
           </v-col>
         </v-row>
@@ -37,13 +53,17 @@
   </v-app>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Register",
   data: () => ({
-    //
+    data: { name: null, email: null, password: null }
   }),
   props: {
     source: String
+  },
+  methods: {
+    ...mapActions("User", ["register"])
   }
 };
 </script>
