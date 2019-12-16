@@ -32,7 +32,8 @@ const actions = {
         password: user.password
       })
       .then(response => {
-        console.log("before auth_sucess", response.data);
+        axios.defaults.headers.common["authorization"] =
+          response.data.accessToken;
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         commit("AUTH_SUCCESS");
@@ -48,17 +49,36 @@ const actions = {
         data: { refreshToken: localStorage.getItem("refreshToken") }
       })
       .then(() => {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        delete axios.defaults.headers.common["Authorization"];
+        _clearTokens();
         commit("LOGOUT");
       })
       .catch(err => {
         console.log(err);
+        _clearTokens();
+        commit("LOGOUT");
       });
+  },
+  verify({ commit }) {
+    const config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("accessToken")
+      }
+    };
+    const bodyParameters = {
+      key: "value"
+    };
+    axios.post(API.user.VERIFY_TOKEN_API, bodyParameters, config).catch(() => {
+      _clearTokens();
+      commit("LOGOUT");
+    });
   }
 };
 
+function _clearTokens() {
+  console.log("cleartokens");
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+}
 const getters = {};
 
 export default {
