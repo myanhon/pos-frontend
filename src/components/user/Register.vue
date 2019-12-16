@@ -42,7 +42,6 @@
                     <v-btn @click="register(data)" color="primary"
                       >Register</v-btn
                     >
-                    <v-btn @click="logout" color="primary">logout</v-btn>
                   </v-row>
                 </v-form>
               </v-card-text>
@@ -64,7 +63,7 @@ export default {
     source: String
   },
   methods: {
-    ...mapActions("User", ["register", "logout"])
+    ...mapActions("User", ["register"])
   }
 };
 </script>

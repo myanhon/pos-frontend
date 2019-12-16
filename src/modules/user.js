@@ -43,10 +43,19 @@ const actions = {
       });
   },
   logout({ commit }) {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    delete axios.defaults.headers.common["Authorization"];
-    commit("LOGOUT");
+    axios
+      .delete(API.user.LOGOUT_API, {
+        data: { refreshToken: localStorage.getItem("refreshToken") }
+      })
+      .then(() => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        delete axios.defaults.headers.common["Authorization"];
+        commit("LOGOUT");
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 
