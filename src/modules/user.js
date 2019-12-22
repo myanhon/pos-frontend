@@ -1,5 +1,6 @@
 import axios from "axios";
 const API = require("../../config/API");
+import router from "../router";
 
 const state = {
   status: null,
@@ -9,13 +10,13 @@ const state = {
 
 const mutations = {
   AUTH_REQUEST(state) {
-    state.status = "loading";
+    state.status = "Loading";
   },
   AUTH_SUCCESS(state) {
-    state.status = "success";
+    state.status = "Success";
   },
   AUTH_ERROR(state) {
-    state.status = "error";
+    state.status = "Error";
   },
   LOGOUT(state) {
     state.status = null;
@@ -36,10 +37,12 @@ const actions = {
           response.data.accessToken;
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
+        router.push({ name: "Drinks" });
         commit("AUTH_SUCCESS");
       })
       .catch(error => {
         commit("AUTH_ERROR");
+        alert(error.response.statusText);
         console.log(error.response);
       });
   },
@@ -76,10 +79,15 @@ const actions = {
 
 function _clearTokens() {
   console.log("cleartokens");
+  axios.defaults.headers.common["authorization"] = null;
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
 }
-const getters = {};
+const getters = {
+  getStatus(state) {
+    return state.status;
+  }
+};
 
 export default {
   namespaced: "User",

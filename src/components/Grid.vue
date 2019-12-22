@@ -11,8 +11,6 @@
           max-height="200"
         ></v-img>
         <p>Price: 2.50</p>
-
-
       </v-col>
       <v-col class="box2" sm="6" md="5" offset-md="2" lg="3" offset-lg="0">
         <v-card class="pa-2" outlined tile>

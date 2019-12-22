@@ -2,25 +2,28 @@
   <v-app>
     <!--        <Grid :products="products" name="Drinks"></Grid>-->
     <!--    {{ getAllProducts }}-->
-    <h1>DRINKS</h1>
+    <Grid></Grid>
   </v-app>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import Grid from "../Grid";
 export default {
   data: () => ({
     //
   }),
-  components: {},
   methods: {
     ...mapActions("Product", ["fetchAllProducts"])
   },
   mounted() {
-    this.fetchAllProducts();
+    // this.fetchAllProducts();
   },
   computed: {
     ...mapGetters("Product", ["getAllProducts"])
+  },
+  components: {
+    Grid
   }
 };
 </script>

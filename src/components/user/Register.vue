@@ -53,7 +53,7 @@
   </v-app>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "Register",
   data: () => ({
@@ -62,8 +62,12 @@ export default {
   props: {
     source: String
   },
+  created() {
+    this.logout();
+  },
+  computed: mapState("User", ["status"]),
   methods: {
-    ...mapActions("User", ["register"])
+    ...mapActions("User", ["register", "logout"])
   }
 };
 </script>

@@ -1,13 +1,14 @@
 <template>
   <v-app>
     <v-content> <router-view></router-view></v-content>
-    <v-btn @click="verify()" color="primary">verify</v-btn>
-    ></v-app
-  >
+    <Toolbar v-if="getStatus === 'Success'"></Toolbar>
+  </v-app>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import Toolbar from "./components/Toolbar";
+
 export default {
   name: "App",
 
@@ -16,6 +17,15 @@ export default {
   }),
   methods: {
     ...mapActions("User", ["verify"])
+  },
+  mounted() {
+    console.log(this.getStatus);
+  },
+  computed: {
+    ...mapGetters("User", ["getStatus"])
+  },
+  components: {
+    Toolbar
   }
 };
 </script>
