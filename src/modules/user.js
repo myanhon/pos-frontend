@@ -1,6 +1,7 @@
 import axios from "axios";
 const API = require("../../config/API");
 import router from "../router";
+import toast from "../toast";
 
 const state = {
   status: null,
@@ -42,8 +43,8 @@ const actions = {
       })
       .catch(error => {
         commit("AUTH_ERROR");
-        alert(error.response.statusText);
-        console.log(error.response);
+        toast.error(error.response.data.message, "Error");
+        console.log(error.response.data.message);
       });
   },
   logout({ commit }) {
