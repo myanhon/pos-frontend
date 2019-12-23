@@ -1,14 +1,10 @@
 <template>
-  <v-app>
-    <!--        <Grid :products="products" name="Drinks"></Grid>-->
-    <!--    {{ getAllProducts }}-->
-    <Grid></Grid>
-  </v-app>
+  <v-content><h1>DRINKS</h1></v-content>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import Grid from "../Grid";
+// import Grid from "../Grid";
 export default {
   data: () => ({
     //
@@ -23,7 +19,7 @@ export default {
     ...mapGetters("Product", ["getAllProducts"])
   },
   components: {
-    Grid
+    // Grid
   }
 };
 </script>

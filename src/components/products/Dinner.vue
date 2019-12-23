@@ -1,9 +1,5 @@
 <template>
-  <v-app>
-    <!--        <Grid name="Dinner" :category="category"></Grid>-->
-    <Grid></Grid>
-    <h1>DINNER</h1>
-  </v-app>
+  <v-content><h1>DINNER</h1></v-content>
 </template>
 
 <script>

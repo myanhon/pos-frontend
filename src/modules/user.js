@@ -38,7 +38,7 @@ const actions = {
           response.data.accessToken;
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
-        router.push({ name: "Drinks" });
+        router.push({ name: "Home" });
         commit("AUTH_SUCCESS");
       })
       .catch(error => {
