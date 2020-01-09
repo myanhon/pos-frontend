@@ -34,17 +34,28 @@ const actions = {
         password: user.password
       })
       .then(response => {
-        axios.defaults.headers.common["authorization"] =
-          response.data.accessToken;
-        localStorage.setItem("accessToken", response.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
-        router.push({ name: "Home" });
+        _setTokens(response);
         commit("AUTH_SUCCESS");
       })
       .catch(error => {
         commit("AUTH_ERROR");
         toast.error(error.response.data.message, "Error");
-        console.log(error.response.data.message);
+      });
+  },
+  login({ commit }, user) {
+    commit("AUTH_REQUEST");
+    axios
+      .post(API.user.LOGIN_API, {
+        email: user.email,
+        password: user.password
+      })
+      .then(response => {
+        _setTokens(response);
+        commit("AUTH_SUCCESS");
+      })
+      .catch(error => {
+        commit("AUTH_ERROR");
+        toast.error(error.response.data.message, "Error");
       });
   },
   logout({ commit }) {
@@ -83,6 +94,12 @@ function _clearTokens() {
   axios.defaults.headers.common["authorization"] = null;
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
+}
+function _setTokens(response) {
+  axios.defaults.headers.common["authorization"] = response.data.accessToken;
+  localStorage.setItem("accessToken", response.data.accessToken);
+  localStorage.setItem("refreshToken", response.data.refreshToken);
+  router.push({ name: "Home" });
 }
 const getters = {
   getStatus(state) {
