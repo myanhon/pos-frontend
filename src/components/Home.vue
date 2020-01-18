@@ -61,7 +61,7 @@ import Wine from "./products/Wine";
 
 export default {
   data: () => ({
-    selectedComponent: "Dinner"
+    selectedComponent: "Drinks"
   }),
   components: { Drinks, Lunch, Dinner, Wine }
 };
@@ -69,7 +69,7 @@ export default {
 
 <style scoped>
 .box1 {
-  background-color: red;
+  background-color: purple;
 }
 .box2 {
   background-color: blue;
