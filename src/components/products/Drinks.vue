@@ -1,19 +1,30 @@
 <template>
   <v-container fluid>
-    <v-flex xs12 sm6 md4 lg2>
-      <v-card v-for="colddrink in this.getColdDrinks" :key="colddrink.name">
-        <v-img :src="imageurl(colddrink.url)" aspect-ratio="1.7"></v-img>
-        <p class="font-weight-bold text-primary text-center">
-         Price: ${{ colddrink.price }}
-        </p>
-      </v-card>
-    </v-flex>
+    <v-row>
+      <v-col
+        sm="3"
+        md="4"
+        lg="2"
+        v-for="colddrink in this.getColdDrinks"
+        :key="colddrink.name"
+        class="box1 font-weight-bold text-primary text-center "
+      >
+        <v-card flat>
+          <v-img
+            class="grey--text--text align-end"
+            :src="imageurl(colddrink.url)"
+            aspect-ratio="1.7"
+          >
+          </v-img>
+          <p>{{ colddrink.name }}</p>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
-
 <script>
 import { mapActions, mapGetters } from "vuex";
-// import Grid from "../Grid";
+
 export default {
   data: () => ({
     imageurl: url => {
@@ -28,9 +39,6 @@ export default {
   },
   computed: {
     ...mapGetters("Product", ["getAllProducts", "getColdDrinks"])
-  },
-  components: {
-    // Grid
   }
 };
 </script>

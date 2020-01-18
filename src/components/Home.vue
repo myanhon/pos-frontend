@@ -12,47 +12,29 @@
         </v-col>
       </v-row>
     </v-container>
-
-    <v-bottom-navigation id="footer" dark shift>
-      <v-btn
-        @click="selectedComponent = 'Drinks'"
-        color="green lighten-1"
-        value="drinks"
-      >
+    <v-bottom-navigation id="footer" grow dark shift>
+      <v-btn @click="selectedComponent = 'Drinks'" value="drinks">
         <span>Drinks</span>
         <v-icon>local_drink</v-icon>
       </v-btn>
 
-      <v-btn
-        @click="selectedComponent = 'Lunch'"
-        color="red lighten-1"
-        value="lunch"
-      >
+      <v-btn @click="selectedComponent = 'Lunch'" value="lunch">
         <span>Lunch</span>
-        <v-icon>music_note</v-icon>
+        <v-icon>mdi-food-variant</v-icon>
       </v-btn>
 
-      <v-btn
-        @click="selectedComponent = 'Dinner'"
-        color="purple lighten-1"
-        value="dinner"
-      >
+      <v-btn @click="selectedComponent = 'Dinner'" value="dinner">
         <span>Dinner</span>
-        <v-icon>mdi-book</v-icon>
+        <v-icon>fastfood</v-icon>
       </v-btn>
 
-      <v-btn
-        @click="selectedComponent = 'Wine'"
-        color="lime lighten-1"
-        value="wine"
-      >
+      <v-btn @click="selectedComponent = 'Wine'" value="wine">
         <span>Wine</span>
-        <v-icon>mdi-image</v-icon>
+        <v-icon>format_color_fill</v-icon>
       </v-btn>
     </v-bottom-navigation>
   </v-content>
 </template>
-
 <script>
 import Drinks from "./products/Drinks";
 import Lunch from "./products/Lunch";
@@ -69,7 +51,7 @@ export default {
 
 <style scoped>
 .box1 {
-  background-color: purple;
+  background-color: #dcdcdc;
 }
 .box2 {
   background-color: blue;
