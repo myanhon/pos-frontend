@@ -15,22 +15,22 @@
     <v-bottom-navigation id="footer" grow dark shift>
       <v-btn @click="selectedComponent = 'Drinks'" value="drinks">
         <span>Drinks</span>
-        <v-icon>local_drink</v-icon>
+        <v-icon>fas fa-glass-whiskey</v-icon>
       </v-btn>
 
       <v-btn @click="selectedComponent = 'Lunch'" value="lunch">
         <span>Lunch</span>
-        <v-icon>mdi-food-variant</v-icon>
+        <v-icon>fastfood</v-icon>
       </v-btn>
 
       <v-btn @click="selectedComponent = 'Dinner'" value="dinner">
         <span>Dinner</span>
-        <v-icon>fastfood</v-icon>
+        <v-icon>fas fa-utensils</v-icon>
       </v-btn>
 
       <v-btn @click="selectedComponent = 'Wine'" value="wine">
         <span>Wine</span>
-        <v-icon>format_color_fill</v-icon>
+        <v-icon>fas fa-wine-bottle</v-icon>
       </v-btn>
     </v-bottom-navigation>
   </v-content>

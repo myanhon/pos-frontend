@@ -14,6 +14,7 @@
                 prepend-icon="person"
                 type="text"
                 v-model="data.email"
+                @keyup.enter="login(data)"
               />
 
               <v-text-field
@@ -23,6 +24,7 @@
                 prepend-icon="lock"
                 type="password"
                 v-model="data.password"
+                @keyup.enter="login(data)"
               />
               <v-row style="padding-bottom: 2%" align="center" justify="center">
                 <v-btn @click="login(data)" color="primary">Login</v-btn>
