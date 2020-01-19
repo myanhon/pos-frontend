@@ -9,7 +9,8 @@ const apiUrl = {
     LOGIN_API: authUrl + "/login",
     LOGOUT_API: authUrl + "/logout",
     VERIFY_TOKEN_API: authUrl + "/verify"
-  }
+  },
+  cart: { ADD_PRODUCT_CART_API: serverUrl + "/api/add-to-cart/" }
 };
 
 module.exports = apiUrl;

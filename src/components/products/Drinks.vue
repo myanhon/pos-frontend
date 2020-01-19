@@ -14,6 +14,7 @@
             class="grey--text--text align-end"
             :src="imageurl(colddrink.url)"
             aspect-ratio="1.7"
+            v-on:click="addProductToCart(colddrink._id)"
           >
           </v-img>
           <p>{{ colddrink.name }}</p>
@@ -32,7 +33,8 @@ export default {
     }
   }),
   methods: {
-    ...mapActions("Product", ["fetchAllProducts"])
+    ...mapActions("Product", ["fetchAllProducts"]),
+    ...mapActions("Cart", ["addProductToCart"])
   },
   mounted() {
     this.fetchAllProducts();
