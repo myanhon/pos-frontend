@@ -6,13 +6,13 @@ const state = {
 };
 
 const mutations = {
-  SAVE_ALL_PRODUCTS(state, data) {
+  SAVE_ALL_PRODUCTS: (state, data) => {
     state.productArray = data;
   }
 };
 
 const actions = {
-  fetchAllProducts({ commit }) {
+  fetchAllProducts: ({ commit }) => {
     axios
       .get(API.product.FETCH_ALL_PRODUCTS_API)
       .then(response => {

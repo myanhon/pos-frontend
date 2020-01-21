@@ -12,17 +12,17 @@ const router = new Router({
   redirect: Login,
   routes: [
     {
-      path: "/",
+      path: "/login",
       name: "Login",
       component: Login
     },
     {
-      path: "/home",
+      path: "/",
       name: "Home",
-      component: Home,
-      meta: {
-        requireAuth: true
-      }
+      component: Home
+      // meta: {
+      //   requireAuth: true
+      // }
     },
     {
       path: "/register",

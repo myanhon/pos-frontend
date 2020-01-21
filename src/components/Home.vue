@@ -7,7 +7,27 @@
         </v-col>
         <v-col class="box2" sm="6" md="5" offset-md="2" lg="3" offset-lg="0">
           <v-card class="pa-2" outlined tile>
-            .col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0
+            <v-list-item v-for="(products, i) in getAllItems" :key="i">
+              <v-list-item-content>
+                <v-list-item-title> {{ products.item.name }}</v-list-item-title>
+                <v-list-item-subtitle
+                  >Quantity: {{ products.qty }}<v-spacer></v-spacer> Price: ${{
+                    products.price
+                  }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+              <v-list-item-icon>
+                <v-icon left>fas fa-plus</v-icon>
+                <v-icon left>fas fa-minus</v-icon>
+                <v-chip label>
+                  <v-icon left>far fa-trash-alt</v-icon>
+                  Remove All
+                </v-chip>
+              </v-list-item-icon>
+            </v-list-item>
+            <p v-if="this.getTotalPrice !== null">
+              Total: ${{ this.getTotalPrice }}
+            </p>
           </v-card>
         </v-col>
       </v-row>
@@ -40,12 +60,16 @@ import Drinks from "./products/Drinks";
 import Lunch from "./products/Lunch";
 import Dinner from "./products/Dinner";
 import Wine from "./products/Wine";
+import { mapGetters } from "vuex";
 
 export default {
   data: () => ({
     selectedComponent: "Drinks"
   }),
-  components: { Drinks, Lunch, Dinner, Wine }
+  components: { Drinks, Lunch, Dinner, Wine },
+  computed: {
+    ...mapGetters("Cart", ["getAllItems", "getTotalPrice"])
+  }
 };
 </script>
 

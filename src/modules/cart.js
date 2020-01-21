@@ -1,29 +1,46 @@
 import axios from "axios";
 const API = require("../../config/API");
-
+// const _ = require("lodash");
 const state = {
-  cartArray: null
+  cartArray: []
 };
 const mutations = {
-  ADD_PRODUCT_CART(state, data) {
+  GET_CART: (state, data) => {
     state.cartArray = data;
   }
 };
 
 const actions = {
-  addProductToCart({ commit }, productId) {
+  addProductToCart: ({ dispatch }, productId) => {
     axios
       .get(API.cart.ADD_PRODUCT_CART_API + productId, { withCredentials: true })
+      .then(() => {
+        dispatch("fetchShoppingCart");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
+  fetchShoppingCart: ({ commit }) => {
+    axios
+      .get(API.cart.GET_SHOPPING_CART, { withCredentials: true })
       .then(response => {
-        console.log("AWOO WE MADE IT", response);
-        commit("ADD_PRODUCT_CART", response.data);
+        commit("GET_CART", response.data);
       })
       .catch(error => {
         console.log(error);
       });
   }
 };
-const getters = {};
+
+const getters = {
+  getAllItems: state => {
+    return state.cartArray.products;
+  },
+  getTotalPrice: state => {
+    return state.cartArray.totalPrice;
+  }
+};
 export default {
   namespaced: "Cart",
   state,
