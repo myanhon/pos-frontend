@@ -18,3 +18,6 @@ export default {
   }
 };
 </script>
+<style>
+@import url("https://fonts.googleapis.com/css?family=Oswald:700&display=swap");
+</style>
