@@ -1,16 +1,30 @@
 import axios from "axios";
 const API = require("../../config/API");
 // const _ = require("lodash");
-const state = {
-  cartArray: []
+
+// initial state
+const getDefaultState = () => {
+  return {
+    cartArray: [],
+    status: "empty"
+  };
 };
+const state = getDefaultState();
+
 const mutations = {
+  resetState: state => {
+    // Merge rather than replace so we don't lose observers
+    Object.assign(state, getDefaultState());
+  },
   GET_CART: (state, data) => {
     state.cartArray = data;
   }
 };
 
 const actions = {
+  resetCartState: ({ commit }) => {
+    commit("resetState");
+  },
   addProductToCart: ({ dispatch }, productId) => {
     axios
       .get(API.cart.ADD_PRODUCT_CART_API + productId, { withCredentials: true })

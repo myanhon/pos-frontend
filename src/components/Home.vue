@@ -5,7 +5,15 @@
         <v-col class="box1" sm="6" md="5" lg="10">
           <component :is="selectedComponent"></component>
         </v-col>
-        <v-col class="box2" sm="6" md="5" offset-md="2" lg="2" offset-lg="0">
+        <v-col
+          class="box2  flex-lg-grow-0 "
+          sm="6"
+          md="5"
+          offset-md="2"
+          lg="2"
+          offset-lg="0"
+          v-if="this.getAllItems != null"
+        >
           <v-card class="pa-2" outlined tile>
             <v-list-item v-for="(products, i) in getAllItems" :key="i">
               <v-list-item-content>
@@ -59,6 +67,7 @@
           >
             CHECKOUT
           </div>
+          <v-btn @click="this.resetCartState"> resetstate</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -100,7 +109,7 @@ export default {
   computed: {
     ...mapGetters("Cart", ["getAllItems", "getTotalPrice"])
   },
-  methods: { ...mapActions("Cart", ["addProductToCart"]) }
+  methods: { ...mapActions("Cart", ["addProductToCart", "resetCartState"]) }
 };
 </script>
 
