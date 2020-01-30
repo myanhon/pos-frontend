@@ -4,6 +4,7 @@ import Login from "./components/user/Login";
 import Register from "./components/user/Register";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
+import Checkout from "./components/Checkout";
 
 Vue.use(Router);
 
@@ -24,6 +25,7 @@ const router = new Router({
       //   requireAuth: true
       // }
     },
+    { path: "/checkout", name: "Checkout", component: Checkout },
     {
       path: "/register",
       name: "Register",
