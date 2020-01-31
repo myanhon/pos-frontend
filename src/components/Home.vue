@@ -62,11 +62,13 @@
               </v-col></v-row
             >
           </v-card>
-          <div
-            class="d-block pa-2 green accent-3 accent-4 white--text text-center font-weight-bold"
-          >
-            CHECKOUT
-          </div>
+          <router-link to="/checkout" class="remove-underline">
+            <div
+              class="d-block pa-2 green accent-3 accent-4 white--text text-center font-weight-bold"
+            >
+              CHECKOUT
+            </div>
+          </router-link>
           <v-btn @click="this.resetCartState"> resetstate</v-btn>
         </v-col>
       </v-row>
@@ -128,5 +130,8 @@ span {
 }
 #footer {
   position: fixed;
+}
+.remove-underline {
+  text-decoration: none;
 }
 </style>
