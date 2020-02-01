@@ -44,6 +44,7 @@
                   :options="stripeOptions"
                   @change="complete = $event.complete"
                 />
+                4242424242424242
               </div>
               <v-row
                 style="padding-bottom: 2%; padding-top:2%;"
@@ -58,6 +59,7 @@
                 >
                   Pay with credit card
                 </v-btn>
+                <v-btn @click="getTest"> getTest</v-btn>
               </v-row>
             </v-form>
           </v-card-text>
@@ -68,7 +70,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { Card, createToken } from "vue-stripe-elements-plus";
 
 export default {
@@ -86,9 +88,10 @@ export default {
   }),
   components: { Card },
   computed: {
-    ...mapGetters("Cart", ["getAllItems", "getTotalPrice"])
+    ...mapGetters("Cart", ["getTotalPrice"])
   },
   methods: {
+    ...mapActions("Checkout", ["createCharge", "getTest"]),
     pay() {
       // createToken returns a Promise which resolves in a result object with
       // either a token or an error key.
@@ -96,8 +99,7 @@ export default {
       // See https://stripe.com/docs/api#errors for the error object.
       // More general https://stripe.com/docs/stripe.js#stripe-create-token.
       createToken().then(data => {
-        this.stripeToken = data.token;
-        console.log(data.token);
+        this.createCharge(data.token.id);
       });
     }
   }

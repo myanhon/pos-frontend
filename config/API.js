@@ -13,6 +13,9 @@ const apiUrl = {
   cart: {
     ADD_PRODUCT_CART_API: serverUrl + "/api/add-to-cart/",
     GET_SHOPPING_CART: serverUrl + "/api/shopping-cart"
+  },
+  checkout: {
+    POST_TOKEN_API: serverUrl + "/api/checkout/"
   }
 };
 
