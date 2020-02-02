@@ -2,7 +2,7 @@ import axios from "axios";
 const API = require("../../config/API");
 
 const state = {
-  productArray: null
+  productArray: [],
 };
 
 const mutations = {
@@ -25,9 +25,6 @@ const actions = {
 };
 
 const getters = {
-  getAllProducts: state => {
-    return state.productArray;
-  },
   getColdDrinks: state => {
     return state.productArray.filter(drink => drink.category === "Cold Drinks");
   }

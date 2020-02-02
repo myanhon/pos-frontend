@@ -60,7 +60,6 @@ router.beforeEach((to, from, next) => {
     next();
   }
   if (to.matched.some(record => record.meta.checkCart)) {
-    store.dispatch("Product/fetchAllProducts");
     store.dispatch("Checkout/isCartActive");
     next();
   }

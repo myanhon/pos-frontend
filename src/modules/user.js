@@ -45,10 +45,14 @@ const actions = {
   login: ({ commit }, user) => {
     commit("AUTH_REQUEST");
     axios
-      .post(API.user.LOGIN_API, {
-        email: user.email,
-        password: user.password
-      })
+      .post(
+        API.user.LOGIN_API,
+        {
+          email: user.email,
+          password: user.password
+        },
+        { withCredentials: true }
+      )
       .then(response => {
         _setTokens(response);
         commit("AUTH_SUCCESS");

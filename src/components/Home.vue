@@ -112,7 +112,11 @@ export default {
     ...mapGetters("Cart", ["getAllItems", "getTotalPrice"])
   },
   methods: {
-    ...mapActions("Cart", ["addProductToCart"])
+    ...mapActions("Cart", ["addProductToCart"]),
+    ...mapActions("Product", ["fetchAllProducts"])
+  },
+  created() {
+    this.fetchAllProducts();
   }
 };
 </script>
