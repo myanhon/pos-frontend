@@ -58,9 +58,7 @@
                   color="primary"
                 >
                   Pay with credit card
-                </v-btn>
-                <v-btn @click="getTest"> getTest</v-btn>
-              </v-row>
+                </v-btn></v-row>
             </v-form>
           </v-card-text>
         </v-card>
@@ -90,8 +88,9 @@ export default {
   computed: {
     ...mapGetters("Cart", ["getTotalPrice"])
   },
+  mounted() {},
   methods: {
-    ...mapActions("Checkout", ["createCharge", "getTest"]),
+    ...mapActions("Checkout", ["createCharge"]),
     pay() {
       // createToken returns a Promise which resolves in a result object with
       // either a token or an error key.

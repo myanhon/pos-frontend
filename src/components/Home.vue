@@ -13,6 +13,7 @@
           lg="2"
           offset-lg="0"
           v-if="this.getAllItems != null"
+          v-cloak
         >
           <v-card class="pa-2" outlined tile>
             <v-list-item v-for="(products, i) in getAllItems" :key="i">
@@ -69,7 +70,6 @@
               CHECKOUT
             </div>
           </router-link>
-          <v-btn @click="this.resetCartState"> resetstate</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -111,7 +111,9 @@ export default {
   computed: {
     ...mapGetters("Cart", ["getAllItems", "getTotalPrice"])
   },
-  methods: { ...mapActions("Cart", ["addProductToCart", "resetCartState"]) }
+  methods: {
+    ...mapActions("Cart", ["addProductToCart"])
+  }
 };
 </script>
 

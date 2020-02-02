@@ -1,15 +1,13 @@
+import router from "../router";
 const API = require("../../config/API");
 import axios from "axios";
+import toast from "../toast";
 
 const state = {
-  productArray: null,
   status: null
 };
 
 const mutations = {
-  SAVE_ALL_PRODUCTS: (state, data) => {
-    state.productArray = data;
-  },
   CHARGING: state => {
     state.status = "Charging";
   }
@@ -24,17 +22,20 @@ const actions = {
         withCredentials: true
       })
       .then(response => {
-        console.log(response);
+        router.push({ name: "Home" });
+        toast.success(response.data.message, "Success");
       })
       .catch(error => {
-        console.log("nani error", error);
+        console.log(error);
       });
   },
-  getTest: () => {
+  isCartActive: ({ commit }) => {
     axios
       .get(API.checkout.POST_TOKEN_API, { withCredentials: true })
       .then(response => {
-        console.log("waarom werkt dit wel?", response);
+        if (!response.data.isActive) {
+          commit("Cart/resetState", null, { root: true });
+        }
       })
       .catch(error => {
         console.log(error);
