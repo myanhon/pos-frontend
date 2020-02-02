@@ -14,11 +14,10 @@ const mutations = {
 };
 
 const actions = {
-  createCharge: ({ commit }, stripeTokenId) => {
+  createCharge: ({ commit }, data) => {
     commit("CHARGING");
     axios
-      .post(API.checkout.POST_TOKEN_API, stripeTokenId, {
-        headers: { "Content-Type": "text/plain" },
+      .post(API.checkout.POST_TOKEN_API, data, {
         withCredentials: true
       })
       .then(response => {

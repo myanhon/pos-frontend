@@ -15,8 +15,7 @@
                 name="name"
                 type="text"
                 placeholder="Placeholder"
-                v-model="data.email"
-                @keyup.enter="login(data)"
+                v-model="data.name"
               />
 
               <v-text-field
@@ -25,7 +24,6 @@
                 type="text"
                 placeholder="Placeholder"
                 v-model="data.password"
-                @keyup.enter="login(data)"
               />
               <v-text-field
                 label="Card Holder Name"
@@ -33,7 +31,6 @@
                 type="text"
                 placeholder="Placeholder"
                 v-model="data.password"
-                @keyup.enter="login(data)"
               />
 
               <div id="app">
@@ -58,7 +55,8 @@
                   color="primary"
                 >
                   Pay with credit card
-                </v-btn></v-row>
+                </v-btn></v-row
+              >
             </v-form>
           </v-card-text>
         </v-card>
@@ -74,13 +72,12 @@ import { Card, createToken } from "vue-stripe-elements-plus";
 export default {
   name: "Checkout",
   data: () => ({
-    data: { email: null, password: null },
+    data: { name: "Place Holder Name", stripeToken: null },
     complete: false,
     stripeToken: null,
     publishableKey: process.env.VUE_APP_STRIPE_PK,
     stripeOptions: {
       // see https://stripe.com/docs/stripe.js#element-options for details
-
       hidePostalCode: true
     }
   }),
@@ -97,8 +94,9 @@ export default {
       // See https://stripe.com/docs/api#tokens for the token object.
       // See https://stripe.com/docs/api#errors for the error object.
       // More general https://stripe.com/docs/stripe.js#stripe-create-token.
-      createToken().then(data => {
-        this.createCharge(data.token.id);
+      createToken().then(response => {
+        this.data.stripeToken = response.token.id;
+        this.createCharge(this.data);
       });
     }
   }

@@ -8,6 +8,7 @@
         v-for="colddrink in this.getColdDrinks"
         :key="colddrink.name"
         class="box1 font-weight-bold text-primary text-center "
+        v-cloak
       >
         <v-card flat>
           <v-img
@@ -33,14 +34,10 @@ export default {
     }
   }),
   methods: {
-    ...mapActions("Product", ["fetchAllProducts"]),
     ...mapActions("Cart", ["addProductToCart"])
   },
-  mounted() {
-    this.fetchAllProducts();
-  },
   computed: {
-    ...mapGetters("Product", ["getAllProducts", "getColdDrinks"])
+    ...mapGetters("Product", ["getColdDrinks"])
   }
 };
 </script>
