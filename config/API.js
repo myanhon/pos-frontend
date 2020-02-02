@@ -15,7 +15,7 @@ const apiUrl = {
     GET_SHOPPING_CART: serverUrl + "/api/shopping-cart"
   },
   checkout: {
-    POST_TOKEN_API: serverUrl + "/api/checkout/"
+    POST_TOKEN_API: serverUrl + "/api/checkout"
   }
 };
 

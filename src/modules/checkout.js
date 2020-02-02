@@ -19,7 +19,8 @@ const actions = {
   createCharge: ({ commit }, stripeTokenId) => {
     commit("CHARGING");
     axios
-      .get(API.checkout.POST_TOKEN_API + stripeTokenId, {
+      .post(API.checkout.POST_TOKEN_API, stripeTokenId, {
+        headers: { "Content-Type": "text/plain" },
         withCredentials: true
       })
       .then(response => {
