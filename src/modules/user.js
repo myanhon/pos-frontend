@@ -1,7 +1,7 @@
 import axios from "axios";
 const API = require("../../config/API");
 import router from "../router";
-import toast from "../toast";
+import toast from "../../config/toast";
 
 const state = {
   status: null,

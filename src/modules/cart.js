@@ -1,6 +1,6 @@
 import axios from "axios";
 const API = require("../../config/API");
-// const _ = require("lodash");
+
 
 // initial state
 const getDefaultState = () => {
