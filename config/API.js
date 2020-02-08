@@ -5,6 +5,7 @@ const apiUrl = {
   product: { FETCH_ALL_PRODUCTS_API: serverUrl + "/products" },
   user: {
     FETCH_JWT_API: authUrl + "/user/signup",
+    GET_PROFILE: serverUrl + "/users/profile",
     REGISTER_API: authUrl + "/register",
     LOGIN_API: authUrl + "/login",
     LOGOUT_API: authUrl + "/logout",

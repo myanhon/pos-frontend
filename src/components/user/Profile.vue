@@ -2,56 +2,51 @@
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
-        <v-card :shaped="true" class="elevation-12">
+        <v-card
+          class="elevation-12"
+          v-for="(order, i) in this.getOrders"
+          :key="i"
+        >
           <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>User Profile </v-toolbar-title>
+            <v-toolbar-title>Order ID:{{ order._id }} </v-toolbar-title>
           </v-toolbar>
-          <v-card-text>
-            <v-form>
-              <v-text-field
-                label="E-mail"
-                name="login"
-                prepend-icon="person"
-                type="text"
-                v-model="data.email"
-                @keyup.enter="login(data)"
-              />
-
-              <v-text-field
-                id="password"
-                label="Password"
-                name="password"
-                prepend-icon="lock"
-                type="password"
-                v-model="data.password"
-                @keyup.enter="login(data)"
-              />
-              <v-row style="padding-bottom: 2%" align="center" justify="center">
-                <v-btn @click="login(data)" color="primary">Login</v-btn>
-              </v-row>
-            </v-form>
-          </v-card-text>
+          <v-simple-table>
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-left">Name</th>
+                  <th class="text-left">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(items, i) in order.cart.items" :key="i">
+                  <td>{{ items.item.name }}</td>
+                  <td>{{ items.qty }}</td>
+                </tr>
+              </tbody>
+              <v-card-text class="font-weight-bold">
+                Total price: ${{ order.cart.totalPrice }}
+              </v-card-text>
+            </template>
+          </v-simple-table>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Login",
-  data: () => ({
-    data: { email: null, password: null }
-  }),
-  props: {
-    source: String
+  data: () => ({}),
+  computed: {
+    ...mapGetters("User", ["getOrders"])
   },
   created() {
-    // this.logout();
+    this.fetchProfile();
   },
-  computed: mapState("User", ["status"]),
   methods: {
-    ...mapActions("User", ["login", "logout"])
+    ...mapActions("User", ["fetchProfile"])
   }
 };
 </script>

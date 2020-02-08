@@ -5,6 +5,7 @@ import Register from "./components/user/Register";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
 import Checkout from "./components/Checkout";
+import Profile from "./components/user/Profile";
 import store from "./store/store";
 
 Vue.use(Router);
@@ -20,6 +21,11 @@ const router = new Router({
       meta: {
         checkLogin: true
       }
+    },
+    {
+      path: "/profile",
+      name: "Profile",
+      component: Profile
     },
     {
       path: "/",

@@ -5,6 +5,7 @@ import toast from "../../config/toast";
 
 const state = {
   status: null,
+  orders: null,
   accessToken: localStorage.getItem("accessToken"),
   refreshToken: localStorage.getItem("refreshToken")
 };
@@ -21,10 +22,23 @@ const mutations = {
   },
   LOGOUT: state => {
     state.status = null;
+  },
+  SAVE_ALL_ORDERS: (state, data) => {
+    state.orders = data;
   }
 };
 
 const actions = {
+  fetchProfile: ({ commit }) => {
+    axios
+      .get(API.user.GET_PROFILE, { withCredentials: true })
+      .then(response => {
+        commit("SAVE_ALL_ORDERS", response.data.orders);
+      })
+      .catch(error => {
+        toast.error(error.response.data.message, "Error");
+      });
+  },
   register: ({ commit }, user) => {
     commit("AUTH_REQUEST");
     axios
@@ -118,6 +132,9 @@ function _setTokens(response) {
 const getters = {
   getStatus: state => {
     return state.status;
+  },
+  getOrders: state => {
+    return state.orders;
   }
 };
 
