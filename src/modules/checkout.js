@@ -14,19 +14,23 @@ const mutations = {
 };
 
 const actions = {
-  createCharge: ({ commit }, data) => {
+  createCharge: ({ commit, rootGetters }, data) => {
     commit("CHARGING");
-    axios
-      .post(API.checkout.POST_TOKEN_API, data, {
-        withCredentials: true
-      })
-      .then(response => {
-        router.push({ name: "Home" });
-        toast.success(response.data.message, "Success");
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    if (rootGetters["User/getStatus"] === "Success") {
+      axios
+        .post(API.checkout.POST_TOKEN_API, data, {
+          withCredentials: true
+        })
+        .then(response => {
+          router.push({ name: "Home" });
+          toast.success(response.data.message, "Success");
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      router.push({ name: "Login" });
+    }
   },
   isCartActive: ({ commit }) => {
     axios
@@ -35,6 +39,16 @@ const actions = {
         if (!response.data.isActive) {
           commit("Cart/resetState", null, { root: true });
         }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
+  redirectUser: () => {
+    axios
+      .get("http://localhost:3000/geng", { withCredentials: true })
+      .then(response => {
+        console.log("redirectTest: ", response);
       })
       .catch(error => {
         console.log(error);

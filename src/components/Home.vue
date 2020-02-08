@@ -4,6 +4,7 @@
       <v-row no-gutters>
         <v-col class="box1" sm="6" md="5" lg="10">
           <component :is="selectedComponent"></component>
+          <v-btn @click="this.logout"> logout</v-btn>
         </v-col>
         <v-col
           class="box2  flex-lg-grow-0 "
@@ -113,7 +114,8 @@ export default {
   },
   methods: {
     ...mapActions("Cart", ["addProductToCart"]),
-    ...mapActions("Product", ["fetchAllProducts"])
+    ...mapActions("Product", ["fetchAllProducts"]),
+    ...mapActions("User", ["logout"])
   },
   created() {
     this.fetchAllProducts();

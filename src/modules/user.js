@@ -63,17 +63,27 @@ const actions = {
       });
   },
   logout: ({ commit }) => {
+    // axios
+    //   .delete(API.user.LOGOUT_API, {
+    //     data: { refreshToken: localStorage.getItem("refreshToken") }
+    //   })
+    //   .then(() => {
+    //     _clearTokens();
+    //     commit("LOGOUT");
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //     _clearTokens();
+    //     commit("LOGOUT");
+    //   });
     axios
-      .delete(API.user.LOGOUT_API, {
-        data: { refreshToken: localStorage.getItem("refreshToken") }
-      })
+      .get(API.user.LOGOUT_API, { withCredentials: true })
       .then(() => {
-        _clearTokens();
+        router.push({ name: "Home" });
         commit("LOGOUT");
       })
       .catch(err => {
         console.log(err);
-        _clearTokens();
         commit("LOGOUT");
       });
   },

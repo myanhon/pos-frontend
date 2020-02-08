@@ -16,7 +16,10 @@ const router = new Router({
     {
       path: "/login",
       name: "Login",
-      component: Login
+      component: Login,
+      meta: {
+        checkLogin: true
+      }
     },
     {
       path: "/",
@@ -47,6 +50,15 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (!to.matched.length) {
     next("/404");
+  } else {
+    next();
+  }
+  if (to.matched.some(record => record.meta.checkLogin)) {
+    if (store.getters["User/getStatus"] === "Success") {
+      next("/");
+      return;
+    }
+    next();
   } else {
     next();
   }
