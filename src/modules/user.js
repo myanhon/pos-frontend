@@ -22,6 +22,9 @@ const mutations = {
   },
   LOGOUT: state => {
     state.status = null;
+    state.orders = null;
+    state.accessToken = null;
+    state.refreshToken = null;
   },
   SAVE_ALL_ORDERS: (state, data) => {
     state.orders = data;
@@ -31,12 +34,19 @@ const mutations = {
 const actions = {
   fetchProfile: ({ commit }) => {
     axios
-      .get(API.user.GET_PROFILE, { withCredentials: true })
+      .get(API.user.GET_USER_ORDERS, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken")
+        },
+        withCredentials: true
+      })
       .then(response => {
         commit("SAVE_ALL_ORDERS", response.data.orders);
       })
       .catch(error => {
-        toast.error(error.response.data.message, "Error");
+        if (error.response.status === 403) {
+          router.push({ name: "Home" });
+        }
       });
   },
   register: ({ commit }, user) => {
@@ -77,24 +87,16 @@ const actions = {
       });
   },
   logout: ({ commit }) => {
-    // axios
-    //   .delete(API.user.LOGOUT_API, {
-    //     data: { refreshToken: localStorage.getItem("refreshToken") }
-    //   })
-    //   .then(() => {
-    //     _clearTokens();
-    //     commit("LOGOUT");
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //     _clearTokens();
-    //     commit("LOGOUT");
-    //   });
     axios
-      .get(API.user.LOGOUT_API, { withCredentials: true })
-      .then(() => {
-        router.push({ name: "Home" });
+      .delete(API.user.LOGOUT_API, {
+        data: { refreshToken: localStorage.getItem("refreshToken") },
+        withCredentials: true
+      })
+      .then(response => {
+        console.log(response);
+        _clearTokens();
         commit("LOGOUT");
+        // router.push({ name: "Home" });
       })
       .catch(err => {
         console.log(err);

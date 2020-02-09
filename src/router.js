@@ -25,14 +25,16 @@ const router = new Router({
     {
       path: "/profile",
       name: "Profile",
-      component: Profile
+      component: Profile,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: "/",
       name: "Home",
       component: Home,
       meta: {
-        // requireAuth: true
         checkCart: true
       }
     },

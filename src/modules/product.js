@@ -2,7 +2,7 @@ import axios from "axios";
 const API = require("../../config/API");
 
 const state = {
-  productArray: [],
+  productArray: []
 };
 
 const mutations = {

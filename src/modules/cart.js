@@ -1,7 +1,6 @@
 import axios from "axios";
 const API = require("../../config/API");
 
-
 // initial state
 const getDefaultState = () => {
   return {
@@ -18,12 +17,29 @@ const mutations = {
   },
   GET_CART: (state, data) => {
     state.cartArray = data;
+  },
+  REDUCE_ONE: (state, id) => {
+    const index = state.cartArray.products.findIndex(
+      product => product._id === id
+    );
+    state.cartArray.products.splice(index, 1);
   }
 };
 
 const actions = {
   resetCartState: ({ commit }) => {
     commit("resetState");
+  },
+  reduceOneFromCart: ({ commit, dispatch }, productId) => {
+    axios
+      .get(API.cart.REDUCE_ONE_FROM_CART + productId, { withCredentials: true })
+      .then(() => {
+        commit("REDUCE_ONE", productId);
+        dispatch("fetchShoppingCart");
+      })
+      .catch(error => {
+        console.log(error);
+      });
   },
   addProductToCart: ({ dispatch }, productId) => {
     axios
