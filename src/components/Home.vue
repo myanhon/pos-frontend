@@ -13,7 +13,7 @@
           offset-md="2"
           lg="2"
           offset-lg="0"
-          v-if="this.getAllItems.length > 0"
+          v-if="this.getAllItems != null && this.getAllItems.length > 0"
           v-cloak
         >
           <v-card class="pa-2" outlined tile>
@@ -27,13 +27,15 @@
                 </v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-icon>
-                <v-icon v-on:click="addProductToCart(products.item._id)"
+                <v-icon @click="addProductToCart(products.item._id)"
                   >mdi-plus</v-icon
                 >
                 <v-icon @click="reduceOneFromCart(products.item._id)" left
                   >mdi-minus</v-icon
                 >
-                <v-icon class="" right>mdi-close</v-icon>
+                <v-icon @click="removeFromCart(products.item._id)" right
+                  >mdi-close</v-icon
+                >
               </v-list-item-icon>
             </v-list-item>
             <v-row no-gutters>
@@ -45,7 +47,10 @@
                 lg="6"
                 offset-lg="0"
               >
-                <p class="ps-4" v-if="this.getTotalPrice !== null">
+                <p
+                  class="ps-4"
+                  v-if="this.getTotalPrice != null && this.getTotalPrice > 0"
+                >
                   TOTAL:
                 </p>
               </v-col>
@@ -59,7 +64,7 @@
               >
                 <p
                   class="text-lg-right pr-4"
-                  v-if="this.getTotalPrice !== null"
+                  v-if="this.getTotalPrice != null && this.getTotalPrice > 0"
                 >
                   ${{ this.getTotalPrice }}
                 </p>
@@ -115,7 +120,11 @@ export default {
     ...mapGetters("Cart", ["getAllItems", "getTotalPrice"])
   },
   methods: {
-    ...mapActions("Cart", ["addProductToCart", "reduceOneFromCart"]),
+    ...mapActions("Cart", [
+      "addProductToCart",
+      "reduceOneFromCart",
+      "removeFromCart"
+    ]),
     ...mapActions("Product", ["fetchAllProducts"]),
     ...mapActions("User", ["logout"])
   },

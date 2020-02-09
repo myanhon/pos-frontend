@@ -14,7 +14,8 @@ const apiUrl = {
   cart: {
     ADD_PRODUCT_CART_API: serverUrl + "/add-to-cart/",
     GET_SHOPPING_CART: serverUrl + "/shopping-cart",
-    REDUCE_ONE_FROM_CART: serverUrl + "/reduce-one-from-cart/"
+    REDUCE_ONE_FROM_CART: serverUrl + "/reduce-one-from-cart/",
+    REMOVE_ITEM_FROM_CART: serverUrl + "/remove-from-cart/"
   },
   checkout: {
     POST_TOKEN_API: serverUrl + "/checkout"
