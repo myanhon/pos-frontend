@@ -15,6 +15,10 @@ export default {
   }),
   methods: {
     ...mapActions("User", ["verify"])
+  },
+  created() {
+    console.log('auth urlll:', process.env.VUE_APP_AUTH_URL);
+    console.log('api urlll:', process.env.VUE_APP_API_URL);
   }
 };
 </script>
