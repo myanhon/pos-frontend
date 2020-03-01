@@ -26,17 +26,21 @@
                   <p>Qty: {{ products.qty }} Price: ${{ products.price }}</p>
                 </v-list-item-subtitle>
               </v-list-item-content>
-              <v-list-item-icon>
-                <v-icon @click="addProductToCart(products.item._id)"
-                  >mdi-plus</v-icon
-                >
-                <v-icon @click="reduceOneFromCart(products.item._id)" left
-                  >mdi-minus</v-icon
-                >
-                <v-icon @click="removeFromCart(products.item._id)" right
-                  >mdi-close</v-icon
-                >
-              </v-list-item-icon>
+              <v-hover v-slot:default="{ hover }">
+                <v-list-item-icon>
+                  <v-icon
+                    :elevation="hover ? 16 : 2"
+                    @click="addProductToCart(products.item._id)"
+                    >mdi-plus</v-icon
+                  >
+                  <v-icon @click="reduceOneFromCart(products.item._id)" left
+                    >mdi-minus</v-icon
+                  >
+                  <v-icon @click="removeFromCart(products.item._id)" right
+                    >mdi-close</v-icon
+                  >
+                </v-list-item-icon>
+              </v-hover>
             </v-list-item>
             <v-row no-gutters>
               <v-col
@@ -101,6 +105,19 @@
         <span>Wine</span>
         <v-icon>fas fa-wine-bottle</v-icon>
       </v-btn>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on">
+            <span>Account</span>
+            <v-icon>fas fa-wine-bottle</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item v-for="(item, index) in items" :key="index">
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-bottom-navigation>
   </v-content>
 </template>
@@ -113,7 +130,8 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   data: () => ({
-    selectedComponent: "Drinks"
+    selectedComponent: "Drinks",
+    items: [{ title: "My Orders", url: "/profile" }, { title: "Click Me" }]
   }),
   components: { Drinks, Lunch, Dinner, Wine },
   computed: {

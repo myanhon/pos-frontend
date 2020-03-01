@@ -10,16 +10,18 @@
         class="box1 font-weight-bold text-primary text-center "
         v-cloak
       >
-        <v-card flat>
-          <v-img
-            class="grey--text--text align-end"
-            :src="imageurl(colddrink.url)"
-            aspect-ratio="1.7"
-            v-on:click="addProductToCart(colddrink._id)"
-          >
-          </v-img>
-          <p>{{ colddrink.name }}</p>
-        </v-card>
+        <v-hover v-slot:default="{ hover }">
+          <v-card :elevation="hover ? 16 : 2" flat>
+            <v-img
+              class="grey--text--text align-end"
+              :src="imageurl(colddrink.url)"
+              aspect-ratio="1.7"
+              v-on:click="addProductToCart(colddrink._id)"
+            >
+            </v-img>
+            <p>{{ colddrink.name }}</p>
+          </v-card>
+        </v-hover>
       </v-col>
     </v-row>
   </v-container>
