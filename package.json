@@ -8,7 +8,8 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "auotfix": "eslint-auto-fix",
-    "build:local":"docker rmi -f pos-frontend && docker build -t pos-frontend . && kubectl delete deployment pos-frontend-deployment && kubectl apply -f ./manifest/pos-frontend-deployment.local.yaml"
+    "build:local": "docker rmi -f pos-frontend && docker build -t pos-frontend . ",
+    "build:k8s": "kubectl delete deployment pos-frontend-deployment && kubectl apply -f ./manifest/pos-frontend-deployment.local.yaml"
   },
   "dependencies": {
     "axios": "^0.19.0",

@@ -49,5 +49,6 @@ spec:
     - protocol: TCP
       port: 89 #ServicePort
       targetPort: 8080 #Containerport
+      nodePort: 31901
 
 
