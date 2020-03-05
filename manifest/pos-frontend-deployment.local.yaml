@@ -13,13 +13,17 @@ spec:                                                    #Specification for depl
     metadata:
       labels:
         app: pos-frontend
-    spec:                                                 #Specification for pods
+    spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: pos-frontend-configmap
       containers:
         - name: pos-frontend                                     #1 container inside the pod
           image: pos-frontend
           imagePullPolicy: IfNotPresent                         # 7
           ports:
-            - containerPort: 8080 # doc port
+            - containerPort: 80 # doc port
           env:
             - name: VUE_APP_STRIPE_PK
               valueFrom:
@@ -36,6 +40,7 @@ spec:                                                    #Specification for depl
                 configMapKeyRef:
                   name: pos-backend-configmap
                   key: api-url
+...
 ---
 apiVersion: v1
 kind: Service
@@ -48,7 +53,8 @@ spec:
   ports:
     - protocol: TCP
       port: 89 #ServicePort
-      targetPort: 8080 #Containerport
+      targetPort: 80 #Containerport
       nodePort: 31901
+...
 
 

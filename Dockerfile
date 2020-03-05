@@ -1,13 +1,40 @@
-FROM node:alpine3.10
-
+# build stage
+FROM node:lts-alpine as build-stage
 WORKDIR /app
-
 COPY . .
+RUN npm ci --silent
+ARG STRIPE_PK
+ARG AUTH_URL
+ARG API_URL
+RUN npm run build
 
-ARG VUE_APP_STRIPE_PK
-ARG VUE_APP_AUTH_URL
-ARG VUE_APP_API_URL
-RUN npm install
-RUN npm install  @vue/cli
+# production stage
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
-CMD ["npm", "run", "serve"]
+
+
+
+
+#FROM nginx
+#
+#RUN apt-get update && apt-get install jq -y
+#
+#WORKDIR /usr/share/nginx/html
+#COPY . .
+#
+#ENTRYPOINT [ "./entrypoint.sh" ]
+#CMD ["nginx", "-g", "daemon off;"]
+
+
+
+#FROM node:alpine3.10
+#
+#WORKDIR /app
+#
+#COPY . .
+#
+#
+#CMD ["npm", "run", "serve"]
