@@ -2,8 +2,8 @@ const apiServerUrl = process.env.VUE_APP_API_URL || "http://localhost:3000";
 
 const authServerUrl = process.env.VUE_APP_AUTH_URL || "http://localhost:4000";
 
-console.log("running on:", process.env.VUE_APP_AUTH_URL);
-console.log("werkt het eindelijkgggggggggggggggg?", config.API_URL);
+console.log("api running on:", apiServerUrl);
+console.log("auth running on:", authServerUrl);
 
 const backEnd = {
   product: { FETCH_ALL_PRODUCTS_API: apiServerUrl + "/products" },

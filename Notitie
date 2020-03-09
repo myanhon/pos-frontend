@@ -1,0 +1,39 @@
+Mocht ik ENV willen gebruiken voor de frontend:
+
+===DockerFile===
+# build stage
+FROM node:lts-alpine as build-stage
+WORKDIR /app
+COPY . .
+RUN npm ci --silent
+RUN npm run build
+
+# production stage
+FROM nginx as production-stage
+WORKDIR /usr/share/nginx/html
+RUN apt-get update && apt-get install jq -y
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY ./config/config.json ./config/config.json
+COPY ./entrypoint.sh ./entrypoint.sh
+EXPOSE 80
+ENTRYPOINT [ "./entrypoint.sh" ]
+CMD ["nginx", "-g", "daemon off;"]
+
+===Entrypoint===
+#!/bin/bash
+
+#Don't forget to make it executable -> chmod +x 'FILE'
+
+echo 'API_URL =' $API_URL
+echo 'STRIPE_KEY =' $STRIPE_KEY
+jq --arg NEW_API_URL "$API_URL" --arg NEW_STRIPE_PK_KEY "$STRIPE_KEY" '.API_URL |=$NEW_API_URL | .STRIPE_KEY |=$NEW_STRIPE_PK_KEY' ./config/config.json > tmp.$$.json && mv tmp.$$.json ./config/config.json
+
+cat ./config/config.json
+exec "$@"
+
+===Config.json===
+{
+  "API_URL": "http://localhost:8080",
+  "AUTH_URL": "http://localhost:4000",
+  "STRIPE_KEY": "pk"
+}
