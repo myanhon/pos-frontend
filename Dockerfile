@@ -1,13 +1,13 @@
-FROM node:alpine3.10
-
+# build stage
+FROM node:lts-alpine as build-stage
 WORKDIR /app
-
 COPY . .
+RUN npm ci --silent
+RUN npm run build
 
-ARG VUE_APP_STRIPE_PK
-ARG VUE_APP_AUTH_URL
-ARG VUE_APP_API_URL
-RUN npm install
-RUN npm install  @vue/cli
-
-CMD ["npm", "run", "serve"]
+# production stage
+FROM nginx as production-stage
+WORKDIR /usr/share/nginx/html
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
