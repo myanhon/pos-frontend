@@ -7,23 +7,58 @@
             <v-card-title>
               Products
               <v-spacer></v-spacer>
-              <v-dialog v-model="dialog" max-width="800px">
+              <v-dialog v-model="dialog" max-width="500px">
                 <template v-slot:activator="{ on }">
                   <v-btn color="primary" dark class="mb-2" v-on="on"
                     >New Item</v-btn
                   >
                 </template>
-                <v-card>
-                  <v-card-title>
-                    <span class="headline">New Item</span>
-                  </v-card-title>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field label="Product name"></v-text-field>
-                      </v-col>
-                    </v-row>
-                  </v-container>
+                <v-card :shaped="true" class="elevation-12">
+                  <v-toolbar color="primary" dark flat>
+                    <v-toolbar-title>New Item </v-toolbar-title>
+                  </v-toolbar>
+                  <v-card-text>
+                    <v-form>
+                      <v-text-field
+                        label="Name"
+                        name="name"
+                        type="text"
+                        v-model="saveItem.name"
+                      />
+                      <v-row>
+                        <v-col>
+                          <v-text-field
+                            label="Price"
+                            name="price"
+                            type="text"
+                            v-model="saveItem.price"
+                          />
+                        </v-col>
+                        <v-col>
+                          <v-select
+                            :items="dropdownSize"
+                            label="Size"
+                            item-value="text"
+                            v-model="saveItem.size"
+                          ></v-select
+                        ></v-col>
+                        <v-col>
+                          <v-select
+                            :items="dropdownCategory"
+                            label="Category"
+                            item-value="text"
+                            v-model="saveItem.category"
+                          ></v-select>
+                        </v-col>
+                      </v-row>
+                      <v-row
+                        style="padding-bottom: 2%"
+                        align="center"
+                        justify="center"
+                      >
+                      </v-row>
+                    </v-form>
+                  </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" text @click="close"
@@ -69,8 +104,10 @@ export default {
   data() {
     return {
       dialog: false,
-      search: "",
-      editedItem: {
+      search: null,
+      dropdownCategory: ["Hot Drinks", "Cold Drinks", "Fish", "Meat"],
+      dropdownSize: ["Small", "Medium", "Large"],
+      saveItem: {
         name: null,
         price: null,
         size: null,
@@ -86,7 +123,7 @@ export default {
         { text: "Price", value: "price" },
         { text: "Size", value: "size" },
         { text: "Category", value: "category" },
-        { text: "Actions", value: "actions" }
+        { text: "Actions", value: "actions", sortable: false }
       ]
     };
   },
@@ -104,7 +141,9 @@ export default {
       confirm("Are you sure you want to delete this item?") &&
         this.getColdDrinks.splice(index, 1);
     },
-    save() {},
+    save() {
+      console.log("saveItem:", this.saveItem);
+    },
     close() {
       this.dialog = false;
     }
