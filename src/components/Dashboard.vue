@@ -1,14 +1,28 @@
 <template>
   <v-app>
-    <h1>Dashboard</h1>
+    <Reveal>
+      <a id="home" href="#">
+        <span>Home</span>
+      </a>
+    </Reveal>
+    <main id="page-wrap">
+      <Products></Products>
+    </main>
   </v-app>
 </template>
 
 <script>
-export default {};
+import { Reveal } from "vue-burger-menu";
+import Products from "./admin/Products";
+export default {
+  data() {
+    return {};
+  },
+  components: {
+    Reveal,
+    Products
+  },
+  created() {}
+};
 </script>
-<style scoped>
-h1 {
-  color: red;
-}
-</style>
+<style scoped></style>

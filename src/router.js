@@ -6,6 +6,7 @@ import NotFound from "./components/NotFound";
 import Home from "./components/Home";
 import Checkout from "./components/Checkout";
 import Profile from "./components/user/Profile";
+import Dashboard from "./components/Dashboard";
 import store from "./store/store";
 
 Vue.use(Router);
@@ -14,6 +15,11 @@ const router = new Router({
   mode: "history",
   redirect: Login,
   routes: [
+    {
+      path: "/dashboard",
+      name: "Dashboard",
+      component: Dashboard
+    },
     {
       path: "/login",
       name: "Login",

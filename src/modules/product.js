@@ -25,6 +25,9 @@ const actions = {
 };
 
 const getters = {
+  getAllProducts: state => {
+    return state.productArray;
+  },
   getColdDrinks: state => {
     return state.productArray.filter(drink => drink.category === "Cold Drinks");
   }
