@@ -14,7 +14,7 @@
           <v-card :elevation="hover ? 16 : 2" flat>
             <v-img
               class="grey--text--text align-end"
-              :src="imageurl(colddrink.url)"
+              :src="serverUrl + colddrink.productImage"
               aspect-ratio="1.7"
               v-on:click="addProductToCart(colddrink._id)"
             >
@@ -27,19 +27,18 @@
   </v-container>
 </template>
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   data: () => ({
-    imageurl: url => {
-      return require("@/assets/" + url);
-    }
+    serverUrl: process.env.VUE_APP_API_URL || 'http://localhost:3000',
+    url: process.env.VUE_APP_API_URL,
   }),
   methods: {
-    ...mapActions("Cart", ["addProductToCart"])
+    ...mapActions('Cart', ['addProductToCart']),
   },
   computed: {
-    ...mapGetters("Product", ["getColdDrinks"])
-  }
+    ...mapGetters('Product', ['getColdDrinks']),
+  },
 };
 </script>

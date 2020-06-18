@@ -21,6 +21,39 @@ const actions = {
       .catch(error => {
         console.log(error);
       });
+  },
+  uploadFile: ({ commit }, image) => {
+    const formData = new FormData();
+    formData.append("name", "genglol");
+    formData.append("price", 5);
+    formData.append("size", "Medium");
+    formData.append("category", "Cold Drink");
+    formData.append("productImage", image);
+
+    axios
+      .post("http://localhost:3000/upload", formData)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
+  addProduct: ({ commit }, product) => {
+    const formData = new FormData();
+    formData.append("name", product.name);
+    formData.append("price", product.price);
+    formData.append("size", product.size);
+    formData.append("category", product.category);
+    formData.append("productImage", product.image);
+    axios
+      .post(API.product.ADD_PRODUCT_API, formData)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 };
 

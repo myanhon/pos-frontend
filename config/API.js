@@ -6,7 +6,10 @@ console.log("api running on:", apiServerUrl);
 console.log("auth running on:", authServerUrl);
 
 const backEnd = {
-  product: { FETCH_ALL_PRODUCTS_API: apiServerUrl + "/products" },
+  product: {
+    FETCH_ALL_PRODUCTS_API: apiServerUrl + "/products",
+    ADD_PRODUCT_API: apiServerUrl + "/product"
+  },
   user: {
     FETCH_JWT_API: authServerUrl + "/user/signup",
     GET_USER_ORDERS: apiServerUrl + "/user/orders",

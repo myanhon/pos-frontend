@@ -2,7 +2,7 @@
   <v-app>
     <Reveal>
       <a id="home" href="#">
-        <span>Home</span>
+        <span>Products</span>
       </a>
     </Reveal>
     <main id="page-wrap">
