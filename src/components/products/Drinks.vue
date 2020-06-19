@@ -27,18 +27,17 @@
   </v-container>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   data: () => ({
-    serverUrl: process.env.VUE_APP_API_URL || 'http://localhost:3000',
-    url: process.env.VUE_APP_API_URL,
+    serverUrl: process.env.VUE_APP_API_URL || "http://localhost:3000"
   }),
   methods: {
-    ...mapActions('Cart', ['addProductToCart']),
+    ...mapActions("Cart", ["addProductToCart"])
   },
   computed: {
-    ...mapGetters('Product', ['getColdDrinks']),
-  },
+    ...mapGetters("Product", ["getColdDrinks"])
+  }
 };
 </script>

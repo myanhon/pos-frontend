@@ -8,7 +8,8 @@ console.log("auth running on:", authServerUrl);
 const backEnd = {
   product: {
     FETCH_ALL_PRODUCTS_API: apiServerUrl + "/products",
-    ADD_PRODUCT_API: apiServerUrl + "/product"
+    ADD_PRODUCT_API: apiServerUrl + "/product",
+    DELETE_PRODUCT_API: apiServerUrl + "/product"
   },
   user: {
     FETCH_JWT_API: authServerUrl + "/user/signup",
