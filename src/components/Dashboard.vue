@@ -1,6 +1,9 @@
 <template>
   <v-app>
     <Reveal>
+      <a id="home" href="http://localhost:8080/">
+        <span>Home</span>
+      </a>
       <a id="home" href="#">
         <span>Products</span>
       </a>
@@ -14,6 +17,7 @@
 <script>
 import { Reveal } from "vue-burger-menu";
 import Products from "./admin/Products";
+
 export default {
   data() {
     return {};

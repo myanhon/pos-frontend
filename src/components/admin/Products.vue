@@ -9,7 +9,7 @@
             <v-dialog v-model="dialog" max-width="500px">
               <template v-slot:activator="{ on }">
                 <v-btn
-                  color="primary"
+                  color="pink accent-2"
                   dark
                   class="mb-2"
                   @click="emptyDialog"
@@ -104,7 +104,7 @@
               <v-icon small class="mr-2" @click="editItem(item)"
                 >mdi-pencil</v-icon
               >
-              <v-icon small @click="deleteProduct(item._id)">mdi-delete</v-icon>
+              <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
             </template>
           </v-data-table>
         </v-card>
@@ -155,9 +155,16 @@ export default {
     emptyDialog() {
       this.saveItem = {};
     },
+    deleteItem(item) {
+      if (confirm("Do you want really want to delete?")) {
+        this.deleteProduct(item._id);
+      }
+    },
     save() {
-      this.addProduct(this.saveItem);
-      this.dialog = false;
+      if (confirm("Do you want really want to update?")) {
+        this.addProduct(this.saveItem);
+        this.dialog = false;
+      }
     },
     closeMySelf() {
       this.dialog = false;
