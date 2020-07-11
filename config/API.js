@@ -17,7 +17,8 @@ const backEnd = {
     REGISTER_API: authServerUrl + "/register",
     LOGIN_API: authServerUrl + "/login",
     LOGOUT_API: authServerUrl + "/logout",
-    VERIFY_TOKEN_API: authServerUrl + "/verify"
+    VERIFY_TOKEN_API: authServerUrl + "/verify",
+    GET_REFRESH_TOKEN_API: authServerUrl + "/refreshToken"
   },
   cart: {
     ADD_PRODUCT_CART_API: apiServerUrl + "/add-to-cart/",

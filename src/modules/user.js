@@ -52,11 +52,15 @@ const actions = {
   register: ({ commit }, user) => {
     commit("AUTH_REQUEST");
     axios
-      .post(API.user.REGISTER_API, {
-        name: user.name,
-        email: user.email,
-        password: user.password
-      })
+      .post(
+        API.user.REGISTER_API,
+        {
+          name: user.name,
+          email: user.email,
+          password: user.password
+        },
+        { withCredentials: true }
+      )
       .then(response => {
         _setTokens(response);
         commit("AUTH_SUCCESS");
@@ -127,6 +131,7 @@ function _clearTokens() {
 function _setTokens(response) {
   localStorage.setItem("accessToken", response.data.accessToken);
   localStorage.setItem("refreshToken", response.data.refreshToken);
+  console.log("set refreshtoken", response.data.refreshToken);
   router.push({ name: "Home" });
 }
 const getters = {
