@@ -45,7 +45,17 @@ const actions = {
       })
       .catch(error => {
         if (error.response.status === 403) {
-          router.push({ name: "Home" });
+          axios
+            .post(API.user.GET_REFRESH_TOKEN_API, {
+              refreshToken: localStorage.getItem("refreshToken")
+            })
+            .then(response => {
+              localStorage.setItem("accessToken", response.data.accessToken);
+              router.push({ name: "Home" });
+            })
+            .catch(er => {
+              console.log(er);
+            });
         }
       });
   },
@@ -122,6 +132,20 @@ const actions = {
     });
   }
 };
+
+function _clearRefreshToken() {
+  axios
+    .delete(API.user.LOGOUT_API, {
+      data: { refreshToken: localStorage.getItem("refreshToken") },
+      withCredentials: true
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
 
 function _clearTokens() {
   console.log("cleartokens");
