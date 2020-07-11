@@ -121,12 +121,10 @@ const actions = {
 
 function _clearTokens() {
   console.log("cleartokens");
-  axios.defaults.headers.common["authorization"] = null;
   localStorage.removeItem("accessToken");
   localStorage.removeItem("refreshToken");
 }
 function _setTokens(response) {
-  axios.defaults.headers.common["authorization"] = response.data.accessToken;
   localStorage.setItem("accessToken", response.data.accessToken);
   localStorage.setItem("refreshToken", response.data.refreshToken);
   router.push({ name: "Home" });

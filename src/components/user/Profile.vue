@@ -1,5 +1,11 @@
 <template>
   <v-container class="fill-height" fluid>
+    <Reveal>
+      <a id="home" :href="this.homeUrl">
+        <span>Home</span>
+      </a>
+    </Reveal>
+    <main id="page-wrap"></main>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
         <v-card
@@ -36,14 +42,20 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { Reveal } from "vue-burger-menu";
 export default {
   name: "Login",
-  data: () => ({}),
+  data: () => ({
+    homeUrl: process.env.VUE_APP_HOME_URL || "http://localhost:8080/"
+  }),
   computed: {
     ...mapGetters("User", ["getOrders"])
   },
   created() {
     this.fetchProfile();
+  },
+  components: {
+    Reveal
   },
   methods: {
     ...mapActions("User", ["fetchProfile"])

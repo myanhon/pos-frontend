@@ -77,7 +77,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
   if (to.matched.some(record => record.meta.requireAuth)) {
-    if (localStorage.getItem("accessToken")) {
+    if (store.getters["User/getStatus"] === "Success") {
       next();
       return;
     }
