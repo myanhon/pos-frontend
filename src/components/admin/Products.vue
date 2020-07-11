@@ -27,7 +27,7 @@
                       label="Name"
                       name="name"
                       type="text"
-                      v-model="saveItem.name"
+                      v-model="dialogItem.name"
                     />
                     <v-row>
                       <v-col>
@@ -35,7 +35,7 @@
                           label="Price"
                           name="price"
                           type="text"
-                          v-model="saveItem.price"
+                          v-model="dialogItem.price"
                         />
                       </v-col>
                       <v-col>
@@ -43,7 +43,7 @@
                           :items="dropdownSize"
                           label="Size"
                           item-value="text"
-                          v-model="saveItem.size"
+                          v-model="dialogItem.size"
                         ></v-select>
                       </v-col>
                       <v-col>
@@ -51,7 +51,7 @@
                           :items="dropdownCategory"
                           label="Category"
                           item-value="text"
-                          v-model="saveItem.category"
+                          v-model="dialogItem.category"
                         ></v-select>
                       </v-col>
                     </v-row>
@@ -60,7 +60,7 @@
                         <v-file-input
                           label="Upload image"
                           ref="productImage"
-                          v-model="saveItem.image"
+                          v-model="dialogItem.image"
                         ></v-file-input>
                       </v-col>
                     </v-row>
@@ -123,13 +123,7 @@ export default {
       serverUrl: process.env.VUE_APP_API_URL || "http://localhost:3000",
       dropdownCategory: ["Hot Drinks", "Cold Drinks", "Fish", "Meat"],
       dropdownSize: ["Small", "Medium", "Large"],
-      saveItem: {
-        name: null,
-        price: null,
-        size: null,
-        category: null,
-        image: null
-      },
+      dialogItem: {},
       headers: [
         {
           text: "Name",
@@ -153,7 +147,7 @@ export default {
       "deleteProduct"
     ]),
     emptyDialog() {
-      this.saveItem = {};
+      this.dialogItem = {};
     },
     deleteItem(item) {
       if (confirm("Do you want really want to delete?")) {
@@ -162,7 +156,7 @@ export default {
     },
     save() {
       if (confirm("Do you want really want to update?")) {
-        this.addProduct(this.saveItem);
+        this.addProduct(this.dialogItem);
         this.dialog = false;
       }
     },
@@ -172,8 +166,12 @@ export default {
     },
     editItem(item) {
       this.dialog = true;
-      this.saveItem = item;
-      console.log("edit:", item);
+      this.dialogItem._id = item._id;
+      this.dialogItem.name = item.name;
+      this.dialogItem.price = item.price;
+      this.dialogItem.size = item.size;
+      this.dialogItem.category = item.category;
+      this.dialogItem.image = item.image;
     }
   },
   computed: {
