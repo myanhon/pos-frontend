@@ -49,7 +49,8 @@ const router = new Router({
       name: "Checkout",
       component: Checkout,
       meta: {
-        requireCart: true
+        requireCart: true,
+        checkBeforePay: true
       }
     },
     {
@@ -84,6 +85,14 @@ router.beforeEach((to, from, next) => {
     next("/");
   } else {
     next();
+  }
+  if (to.matched.some(record => record.meta.checkBeforePay)) {
+    if (store.getters["User/getStatus"] !== "Success") {
+      next("/Login");
+      return;
+    } else {
+      next();
+    }
   }
   if (to.matched.some(record => record.meta.checkCart)) {
     store.dispatch("Checkout/isCartActive");

@@ -87,6 +87,9 @@ const getters = {
   },
   getColdDrinks: state => {
     return state.productArray.filter(drink => drink.category === "Cold Drinks");
+  },
+  getHotDrinks: state => {
+    return state.productArray.filter(drink => drink.category === "Hot Drinks");
   }
 };
 

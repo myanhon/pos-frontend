@@ -1,12 +1,12 @@
 <template>
   <v-content>
-    <v-container class="grey lighten-5">
+    <v-container>
       <v-row no-gutters>
         <v-col class="box1" sm="6" md="5" lg="10">
-          <component :is="selectedComponent"></component>
+          <component v-cloak :is="selectedComponent"></component>
         </v-col>
         <v-col
-          class="box2  flex-lg-grow-0 "
+          class="box2 pb-12 flex-lg-grow-0 "
           sm="6"
           md="5"
           offset-md="2"
@@ -41,7 +41,7 @@
                 </v-list-item-icon>
               </v-hover>
             </v-list-item>
-            <v-row no-gutters>
+            <v-row>
               <v-col
                 class="pt-4"
                 sm="6"
@@ -83,81 +83,87 @@
           </router-link>
         </v-col>
       </v-row>
-    </v-container>
-    <v-bottom-navigation id="footer" grow dark shift>
-      <v-btn @click="selectedComponent = 'Drinks'" value="drinks">
-        <span>Drinks</span>
-        <v-icon>fas fa-glass-whiskey</v-icon>
-      </v-btn>
-
-      <v-btn @click="selectedComponent = 'Lunch'" value="lunch">
-        <span>Lunch</span>
-        <v-icon>fastfood</v-icon>
-      </v-btn>
-
-      <v-btn @click="selectedComponent = 'Dinner'" value="dinner">
-        <span>Dinner</span>
-        <v-icon>fas fa-utensils</v-icon>
-      </v-btn>
-
-      <v-btn @click="selectedComponent = 'Wine'" value="wine">
-        <span>Wine</span>
-        <v-icon>fas fa-wine-bottle</v-icon>
-      </v-btn>
-      <v-menu offset-y>
-        <template v-slot:activator="{ on }">
-          <v-btn v-on="on">
-            <span>Account</span>
-            <v-icon>fas fa-user</v-icon>
+      <v-row no-gutters>
+        <v-bottom-navigation id="footer" grow dark shift>
+          <v-btn @click="changeComponent('ColdDrinks')" value="ColdDrinks">
+            <span>Cold Drinks</span>
+            <v-icon>fas fa-glass-whiskey</v-icon>
           </v-btn>
-        </template>
-        <v-list class="text-center">
-          <v-list-item-content v-if="getStatus === 'Success'">
-            <v-list-item v-for="(item, index) in loggedIn" :key="index">
-              <v-list-item-title>
-                <router-link
-                  class="pointer"
-                  :to="item.url"
-                  @click="item.method()"
-                >
-                  {{ item.title }}</router-link
-                >
-                <p class="pointer" @click="logout()">
-                  Logout
-                </p>
-              </v-list-item-title>
-            </v-list-item>
-          </v-list-item-content>
-          <v-list-item-content v-else>
-            <v-list-item v-for="(item, index) in notLoggedIn" :key="index">
-              <v-list-item-title>
-                <router-link :to="item.url"> {{ item.title }}</router-link>
-              </v-list-item-title>
-            </v-list-item>
-          </v-list-item-content>
-        </v-list>
-      </v-menu>
-    </v-bottom-navigation>
+          <v-btn @click="changeComponent('HotDrinks')" value="HotDrinks">
+            <span>Hot Drinks</span>
+            <v-icon>fas fa-coffee</v-icon>
+          </v-btn>
+          <v-btn @click="changeComponent('Lunch')" value="lunch">
+            <span>Lunch</span>
+            <v-icon>fastfood</v-icon>
+          </v-btn>
+
+          <v-btn @click="changeComponent('Dinner')" value="dinner">
+            <span>Dinner</span>
+            <v-icon>fas fa-utensils</v-icon>
+          </v-btn>
+
+          <v-btn @click="changeComponent('Wine')" value="wine">
+            <span>Wine</span>
+            <v-icon>fas fa-wine-bottle</v-icon>
+          </v-btn>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn v-on="on">
+                <span>Account</span>
+                <v-icon>fas fa-user</v-icon>
+              </v-btn>
+            </template>
+            <v-list class="text-center">
+              <v-list-item-content v-if="getStatus === 'Success'">
+                <v-list-item v-for="(item, index) in loggedIn" :key="index">
+                  <v-list-item-title>
+                    <router-link
+                      class="pointer"
+                      :to="item.url"
+                      @click="item.method()"
+                    >
+                      {{ item.title }}</router-link
+                    >
+                    <p class="pointer" @click="logout()">
+                      Logout
+                    </p>
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list-item-content>
+              <v-list-item-content v-else>
+                <v-list-item v-for="(item, index) in notLoggedIn" :key="index">
+                  <v-list-item-title>
+                    <router-link :to="item.url"> {{ item.title }}</router-link>
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list-item-content>
+            </v-list>
+          </v-menu>
+        </v-bottom-navigation>
+      </v-row>
+    </v-container>
   </v-content>
 </template>
 <script>
-import Drinks from "./products/Drinks";
 import Lunch from "./products/Lunch";
 import Dinner from "./products/Dinner";
 import Wine from "./products/Wine";
 import Profile from "./user/Profile";
+import ColdDrinks from "./products/Drinks/ColdDrinks";
+import HotDrinks from "./products/Drinks/HotDrinks";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   data: () => ({
-    selectedComponent: "Drinks",
+    selectedComponent: "ColdDrinks",
     loggedIn: [{ title: "My Orders", url: "/profile" }],
     notLoggedIn: [
       { title: "Login", url: "/login" },
       { title: "Register", url: "/register" }
     ]
   }),
-  components: { Drinks, Lunch, Dinner, Wine, Profile },
+  components: { ColdDrinks, HotDrinks, Lunch, Dinner, Wine, Profile },
   computed: {
     ...mapGetters("Cart", ["getAllItems", "getTotalPrice"]),
     ...mapGetters("User", ["getStatus"])
@@ -169,7 +175,10 @@ export default {
       "removeFromCart"
     ]),
     ...mapActions("Product", ["fetchAllProducts"]),
-    ...mapActions("User", ["logout"])
+    ...mapActions("User", ["logout"]),
+    changeComponent(component) {
+      this.selectedComponent = component;
+    }
   },
   created() {
     this.fetchAllProducts();
@@ -191,9 +200,9 @@ export default {
 p {
   font-family: "Oswald", sans-serif;
 }
-.box1 {
-  background-color: #dcdcdc;
-}
+/*.box1 {*/
+/*  background-color: #dcdcdc;*/
+/*}*/
 .box2 {
   background-color: blue;
 }
