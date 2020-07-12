@@ -5,7 +5,7 @@
         sm="3"
         md="4"
         lg="2"
-        v-for="(dinner, i) in this.getDinners"
+        v-for="(alcohol, i) in this.getAlcohols"
         :key="i"
         class="box1 font-weight-bold text-primary text-center "
         v-cloak
@@ -14,12 +14,12 @@
           <v-card :elevation="hover ? 16 : 2" flat>
             <v-img
               class="grey--text--text align-end"
-              :src="serverUrl + dinner.productImage"
+              :src="serverUrl + alcohol.productImage"
               aspect-ratio="1.7"
-              v-on:click="addProductToCart(dinner._id)"
+              v-on:click="addProductToCart(alcohol._id)"
             >
             </v-img>
-            <p>{{ dinner.name }} - {{ dinner.size }} ${{ dinner.price }}</p>
+            <p>{{ alcohol.name }} - {{ alcohol.size }} ${{ alcohol.price }}</p>
           </v-card>
         </v-hover>
       </v-col>
@@ -37,7 +37,7 @@ export default {
     ...mapActions("Cart", ["addProductToCart"])
   },
   computed: {
-    ...mapGetters("Product", ["getDinners"])
+    ...mapGetters("Product", ["getAlcohols"])
   }
 };
 </script>

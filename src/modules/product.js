@@ -90,6 +90,15 @@ const getters = {
   },
   getHotDrinks: state => {
     return state.productArray.filter(drink => drink.category === "Hot Drinks");
+  },
+  getDinners: state => {
+    return state.productArray.filter(drink => drink.category === "Dinner");
+  },
+  getLunch: state => {
+    return state.productArray.filter(drink => drink.category === "Lunch");
+  },
+  getAlcohols: state => {
+    return state.productArray.filter(drink => drink.category === "Alcohol");
   }
 };
 

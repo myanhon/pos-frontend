@@ -14,7 +14,7 @@
                 label="Name"
                 name="name"
                 type="text"
-                placeholder="Placeholder"
+                placeholder="Card Holder Name"
                 v-model="data.name"
               />
 
@@ -22,17 +22,9 @@
                 label="Address"
                 name="address"
                 type="text"
-                placeholder="Placeholder"
-                v-model="data.password"
+                placeholder="Address"
+                v-model="data.address"
               />
-              <v-text-field
-                label="Card Holder Name"
-                name="card holder name"
-                type="text"
-                placeholder="Placeholder"
-                v-model="data.password"
-              />
-
               <div id="app">
                 <card
                   class="stripe-card"
@@ -72,7 +64,7 @@ import { Card, createToken } from "vue-stripe-elements-plus";
 export default {
   name: "Checkout",
   data: () => ({
-    data: { name: "Place Holder Name", stripeToken: null },
+    data: { name: null, address: null, stripeToken: null },
     complete: false,
     stripeToken: null,
     publishableKey: process.env.VUE_APP_STRIPE_PK,

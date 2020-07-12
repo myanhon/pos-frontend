@@ -121,7 +121,13 @@ export default {
       dialog: false,
       search: null,
       serverUrl: process.env.VUE_APP_API_URL || "http://localhost:3000",
-      dropdownCategory: ["Hot Drinks", "Cold Drinks", "Fish", "Meat"],
+      dropdownCategory: [
+        "Hot Drinks",
+        "Cold Drinks",
+        "Fish",
+        "Meat",
+        "Alcohol"
+      ],
       dropdownSize: ["Small", "Medium", "Large"],
       dialogItem: {},
       headers: [

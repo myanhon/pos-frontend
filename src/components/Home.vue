@@ -103,8 +103,8 @@
             <v-icon>fas fa-utensils</v-icon>
           </v-btn>
 
-          <v-btn @click="changeComponent('Wine')" value="wine">
-            <span>Wine</span>
+          <v-btn @click="changeComponent('Alcohol')" value="Alcohol">
+            <span>Alcohol</span>
             <v-icon>fas fa-wine-bottle</v-icon>
           </v-btn>
           <v-menu offset-y>
@@ -148,7 +148,7 @@
 <script>
 import Lunch from "./products/Lunch";
 import Dinner from "./products/Dinner";
-import Wine from "./products/Wine";
+import Alcohol from "./products/Alcohol";
 import Profile from "./user/Profile";
 import ColdDrinks from "./products/Drinks/ColdDrinks";
 import HotDrinks from "./products/Drinks/HotDrinks";
@@ -163,7 +163,7 @@ export default {
       { title: "Register", url: "/register" }
     ]
   }),
-  components: { ColdDrinks, HotDrinks, Lunch, Dinner, Wine, Profile },
+  components: { ColdDrinks, HotDrinks, Lunch, Dinner, Alcohol, Profile },
   computed: {
     ...mapGetters("Cart", ["getAllItems", "getTotalPrice"]),
     ...mapGetters("User", ["getStatus"])
@@ -203,9 +203,9 @@ p {
 /*.box1 {*/
 /*  background-color: #dcdcdc;*/
 /*}*/
-.box2 {
-  background-color: blue;
-}
+/*.box2 {*/
+/*  background-color: blue;*/
+/*}*/
 span {
   font-size: 20px;
 }

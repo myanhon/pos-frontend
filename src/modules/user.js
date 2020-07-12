@@ -55,6 +55,7 @@ const actions = {
             })
             .catch(er => {
               console.log(er);
+              _clearTokens();
             });
         }
       });
@@ -155,7 +156,6 @@ function _clearTokens() {
 function _setTokens(response) {
   localStorage.setItem("accessToken", response.data.accessToken);
   localStorage.setItem("refreshToken", response.data.refreshToken);
-  console.log("set refreshtoken", response.data.refreshToken);
   router.push({ name: "Home" });
 }
 const getters = {
