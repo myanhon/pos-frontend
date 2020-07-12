@@ -1,42 +1,13 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col
-        sm="3"
-        md="4"
-        lg="2"
-        v-for="(hotdrink, i) in this.getHotDrinks"
-        :key="i"
-        class="box1 font-weight-bold text-primary text-center "
-        v-cloak
-      >
-        <v-hover v-slot:default="{ hover }">
-          <v-card :elevation="hover ? 16 : 2" flat>
-            <v-img
-              class="grey--text--text align-end"
-              :src="serverUrl + hotdrink.productImage"
-              aspect-ratio="1.7"
-              v-on:click="addProductToCart(hotdrink._id)"
-            >
-            </v-img>
-            <p>
-              {{ hotdrink.name }} - {{ hotdrink.size }} ${{ hotdrink.price }}
-            </p>
-          </v-card>
-        </v-hover>
-      </v-col>
-    </v-row>
-  </v-container>
+  <LoadProducts :products="this.getHotDrinks"></LoadProducts>
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
+import LoadProducts from "../LoadProducts";
 export default {
-  data: () => ({
-    serverUrl: process.env.VUE_APP_API_URL || "http://localhost:3000"
-  }),
-  methods: {
-    ...mapActions("Cart", ["addProductToCart"])
+  components: {
+    LoadProducts
   },
   computed: {
     ...mapGetters("Product", ["getHotDrinks"])
