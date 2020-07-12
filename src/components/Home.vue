@@ -2,14 +2,16 @@
   <v-content>
     <v-container>
       <v-row no-gutters>
-        <v-col class="box1" sm="6" md="5" lg="10">
+        <v-col class="box1" xs="12" sm="12" md="12" lg="10" cols="12">
           <component v-cloak :is="selectedComponent"></component>
         </v-col>
         <v-col
           class="box2 pb-12 flex-lg-grow-0 "
-          sm="6"
-          md="5"
+          xs="12"
+          sm="12"
+          md="12"
           offset-md="2"
+          cols="12"
           lg="2"
           offset-lg="0"
           v-if="this.getAllItems != null && this.getAllItems.length > 0"
