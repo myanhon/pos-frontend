@@ -16,14 +16,15 @@
                 type="text"
                 placeholder="Card Holder Name"
                 v-model="data.name"
+                @change="nameNotEmpty = !nameNotEmpty"
               />
-
               <v-text-field
                 label="Address"
                 name="address"
                 type="text"
                 placeholder="Address"
                 v-model="data.address"
+                @change="addressNotEmpty = !addressNotEmpty"
               />
               <div id="app">
                 <card
@@ -43,12 +44,12 @@
                 <v-btn
                   class="pay-with-stripe"
                   @click="pay"
-                  :disabled="!complete"
+                  :disabled="!isDisabled()"
                   color="primary"
                 >
                   Pay with credit card
-                </v-btn></v-row
-              >
+                </v-btn>
+              </v-row>
             </v-form>
           </v-card-text>
         </v-card>
@@ -66,6 +67,8 @@ export default {
   data: () => ({
     data: { name: null, address: null, stripeToken: null },
     complete: false,
+    nameNotEmpty: false,
+    addressNotEmpty: false,
     stripeToken: null,
     publishableKey: process.env.VUE_APP_STRIPE_PK,
     stripeOptions: {
@@ -80,6 +83,9 @@ export default {
   mounted() {},
   methods: {
     ...mapActions("Checkout", ["createCharge"]),
+    isDisabled() {
+      return this.nameNotEmpty && this.addressNotEmpty && this.complete;
+    },
     pay() {
       // createToken returns a Promise which resolves in a result object with
       // either a token or an error key.
