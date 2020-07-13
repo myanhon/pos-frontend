@@ -21,12 +21,14 @@
               <thead>
                 <tr>
                   <th class="text-left">Name</th>
+                  <th class="text-left">Size</th>
                   <th class="text-left">Amount</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="(items, i) in order.cart.items" :key="i">
                   <td>{{ items.item.name }}</td>
+                  <td>{{ items.item.size }}</td>
                   <td>{{ items.qty }}</td>
                 </tr>
               </tbody>
