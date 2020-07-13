@@ -70,7 +70,9 @@ export default {
     nameNotEmpty: false,
     addressNotEmpty: false,
     stripeToken: null,
-    publishableKey: process.env.VUE_APP_STRIPE_PK,
+    publishableKey:
+      process.env.VUE_APP_STRIPE_PK ||
+      "pk_test_7HxXTcmwBHges4XnKksr7aIn002Kfrox9Q",
     stripeOptions: {
       // see https://stripe.com/docs/stripe.js#element-options for details
       hidePostalCode: true

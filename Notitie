@@ -37,3 +37,23 @@ exec "$@"
   "AUTH_URL": "http://localhost:4000",
   "STRIPE_KEY": "pk"
 }
+=======================================================================
+ROUTER PROBLEM -> https://daten-und-bass.io/blog/serving-a-vue-cli-production-build-on-a-sub-path-with-nginx/
+Replace default default.conf with nginx.conf
+server {
+
+  listen 80;
+
+  location / {
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+    try_files $uri $uri/ /index.html;
+  }
+
+  error_page   500 502 503 504  /50x.html;
+
+  location = /50x.html {
+    root   /usr/share/nginx/html;
+  }
+
+}

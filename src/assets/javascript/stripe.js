@@ -1,6 +1,8 @@
 // Create a Stripe client.
-const stripe = window.Stripe(process.env.VUE_APP_STRIPE_PK);
-
+let key =
+  process.env.VUE_APP_STRIPE_PK || "pk_test_7HxXTcmwBHges4XnKksr7aIn002Kfrox9Q";
+const stripe = window.Stripe(key);
+console.log("stripekey", key);
 // Create an instance of Elements.
 const elements = stripe.elements();
 

@@ -1,6 +1,10 @@
-const apiServerUrl = process.env.VUE_APP_API_URL || "http://localhost:3000";
+// const apiServerUrl = process.env.VUE_APP_API_URL || "http://localhost:1000";
+//
+// const authServerUrl = process.env.VUE_APP_AUTH_URL || "http://localhost:2000";
 
-const authServerUrl = process.env.VUE_APP_AUTH_URL || "http://localhost:4000";
+const apiServerUrl = process.env.VUE_APP_API_URL || "http://pos.backend.io";
+
+const authServerUrl = process.env.VUE_APP_AUTH_URL || "http://pos.auth.io";
 
 console.log("api running on:", apiServerUrl);
 console.log("auth running on:", authServerUrl);
