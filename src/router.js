@@ -18,7 +18,10 @@ const router = new Router({
     {
       path: "/dashboard",
       name: "Dashboard",
-      component: Dashboard
+      component: Dashboard,
+      meta: {
+        requireAuthDashboard: true
+      }
     },
     {
       path: "/login",
@@ -69,7 +72,10 @@ router.beforeEach((to, from, next) => {
     next();
   }
   if (to.matched.some(record => record.meta.checkLogin)) {
-    if (store.getters["User/getStatus"] === "Success") {
+    if (
+      store.getters["User/getStatus"] === "Success" ||
+      store.getters["User/getStatus"] === "Admin Success"
+    ) {
       next("/");
       return;
     }
@@ -78,7 +84,10 @@ router.beforeEach((to, from, next) => {
     next();
   }
   if (to.matched.some(record => record.meta.requireAuth)) {
-    if (store.getters["User/getStatus"] === "Success") {
+    if (
+      store.getters["User/getStatus"] === "Success" ||
+      store.getters["User/getStatus"] === "Admin Success"
+    ) {
       next();
       return;
     }
@@ -87,11 +96,14 @@ router.beforeEach((to, from, next) => {
     next();
   }
   if (to.matched.some(record => record.meta.checkBeforePay)) {
-    if (store.getters["User/getStatus"] !== "Success") {
-      next("/Login");
+    if (
+      store.getters["User/getStatus"] === "Admin Success" ||
+      store.getters["User/getStatus"] === "Success"
+    ) {
+      next();
       return;
     } else {
-      next();
+      next("/Login");
     }
   }
   if (to.matched.some(record => record.meta.checkCart)) {
@@ -106,6 +118,14 @@ router.beforeEach((to, from, next) => {
     next("/");
   } else {
     next();
+  }
+  if (to.matched.some(record => record.meta.requireAuthDashboard)) {
+    if (store.getters["User/getStatus"] === "Admin Success") {
+      next("/Dashboard");
+      return;
+    } else {
+      next("/Login");
+    }
   }
 });
 

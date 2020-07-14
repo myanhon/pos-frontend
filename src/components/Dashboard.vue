@@ -1,11 +1,15 @@
 <template>
   <v-app>
     <Reveal>
-      <a id="home" href="http://localhost:8080/">
-        <span>Home</span>
+      <a id="home" href="#">
+        <router-link to="/" class="remove-underline">
+          <span>Home </span></router-link
+        >
       </a>
       <a id="home" href="#">
-        <span>Products</span>
+        <router-link to="/" class="remove-underline">
+          <span @click="logout">Logout </span></router-link
+        >
       </a>
     </Reveal>
     <main id="page-wrap">
@@ -17,6 +21,7 @@
 <script>
 import { Reveal } from "vue-burger-menu";
 import Products from "./admin/Products";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -26,7 +31,20 @@ export default {
     Reveal,
     Products
   },
-  created() {}
+  methods: {
+    ...mapActions("User", ["logout"]),
+    ...mapActions("Product", ["fetchAllProducts"])
+  },
+  created() {
+    this.fetchAllProducts();
+  }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.remove-underline {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  margin-left: 10px;
+}
+</style>

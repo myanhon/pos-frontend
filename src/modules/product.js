@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../router";
 const API = require("../../config/API");
 
 const state = {
@@ -22,11 +23,19 @@ const mutations = {
 const actions = {
   fetchAllProducts: ({ commit }) => {
     axios
-      .get(API.product.FETCH_ALL_PRODUCTS_API)
+      .get(API.product.FETCH_ALL_PRODUCTS_API, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken")
+        },
+        withCredentials: true
+      })
       .then(response => {
         commit("SAVE_ALL_PRODUCTS", response.data);
       })
       .catch(error => {
+        if (error.response.status === 403) {
+          getRefreshToken();
+        }
         console.log(error);
       });
   },
@@ -57,27 +66,64 @@ const actions = {
     formData.append("productImage", product.image);
 
     axios
-      .post(API.product.ADD_PRODUCT_API, formData)
+      .post(API.product.ADD_PRODUCT_API, formData, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken")
+        },
+        withCredentials: true
+      })
       .then(response => {
         commit("ADD_PRODUCT");
         console.log(response);
       })
       .catch(error => {
+        if (error.response.status === 403) {
+          getRefreshToken();
+        }
         console.log(error);
       });
   },
+
   deleteProduct: ({ commit }, id) => {
     axios
-      .delete(API.product.DELETE_PRODUCT_API, { data: { _id: id } })
+      .delete(API.product.DELETE_PRODUCT_API, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken")
+        },
+        withCredentials: true,
+        data: { _id: id }
+      })
       .then(() => {
         commit("DELETE_PRODUCT");
       })
       .catch(error => {
+        if (error.response.status === 403) {
+          getRefreshToken();
+        }
         console.log(error);
       });
   }
 };
+function _clearTokens() {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  router.push({ name: "Home" });
+}
 
+function getRefreshToken() {
+  axios
+    .post(API.user.GET_REFRESH_TOKEN_API, {
+      refreshToken: localStorage.getItem("refreshToken")
+    })
+    .then(response => {
+      localStorage.setItem("accessToken", response.data.accessToken);
+      location.reload();
+    })
+    .catch(er => {
+      console.log(er);
+      _clearTokens();
+    });
+}
 const getters = {
   getStatus: state => {
     return state.status;

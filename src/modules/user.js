@@ -6,6 +6,7 @@ import toast from "../../config/toast";
 const state = {
   status: null,
   orders: null,
+  user: null,
   accessToken: localStorage.getItem("accessToken"),
   refreshToken: localStorage.getItem("refreshToken")
 };
@@ -14,8 +15,13 @@ const mutations = {
   AUTH_REQUEST: state => {
     state.status = "Loading";
   },
-  AUTH_SUCCESS: state => {
+  AUTH_SUCCESS: (state, data) => {
     state.status = "Success";
+    state.user = data;
+  },
+  AUTH_SUCCESS_ADMIN: (state, data) => {
+    state.status = "Admin Success";
+    state.user = data;
   },
   AUTH_ERROR: state => {
     state.status = "Error";
@@ -56,6 +62,7 @@ const actions = {
             .catch(er => {
               console.log(er);
               _clearTokens();
+              router.push({ name: "Home" });
             });
         }
       });
@@ -93,8 +100,13 @@ const actions = {
         { withCredentials: true }
       )
       .then(response => {
-        _setTokens(response);
-        commit("AUTH_SUCCESS");
+        if (response.data.user.role === "admin") {
+          _setTokens(response);
+          commit("AUTH_SUCCESS_ADMIN", response.data.user);
+        } else {
+          _setTokens(response);
+          commit("AUTH_SUCCESS", response.data.user);
+        }
       })
       .catch(error => {
         commit("AUTH_ERROR");
@@ -107,8 +119,7 @@ const actions = {
         data: { refreshToken: localStorage.getItem("refreshToken") },
         withCredentials: true
       })
-      .then(response => {
-        console.log(response);
+      .then(() => {
         _clearTokens();
         commit("LOGOUT");
         // router.push({ name: "Home" });
@@ -161,6 +172,9 @@ function _setTokens(response) {
 const getters = {
   getStatus: state => {
     return state.status;
+  },
+  getUser: state => {
+    return state.user;
   },
   getOrders: state => {
     return state.orders;

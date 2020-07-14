@@ -43,13 +43,6 @@ export default {
   data: () => ({
     data: { email: null, password: null }
   }),
-  props: {
-    source: String
-  },
-  created() {
-    // this.logout();
-  },
-  computed: mapState("User", ["status"]),
   methods: {
     ...mapActions("User", ["login", "logout"])
   }

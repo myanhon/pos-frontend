@@ -1,13 +1,21 @@
 <template>
   <v-container class="fill-height" fluid>
     <Reveal>
-      <a id="home" :href="this.homeUrl">
-        <span>Home</span>
+      <a id="home" href="#">
+        <router-link to="/" class="remove-underline">
+          <span>Home </span></router-link
+        >
+      </a>
+      <a id="home" href="#">
+        <router-link to="/" class="remove-underline">
+          <span @click="logout">Logout </span></router-link
+        >
       </a>
     </Reveal>
     <main id="page-wrap"></main>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
+        <h1 align="center">Welcome {{ getUser.name }}</h1>
         <v-card
           class="elevation-12"
           v-for="(order, i) in this.getOrders"
@@ -51,7 +59,7 @@ export default {
     homeUrl: process.env.VUE_APP_HOME_URL || "http://localhost:8080/"
   }),
   computed: {
-    ...mapGetters("User", ["getOrders"])
+    ...mapGetters("User", ["getOrders", "getUser"])
   },
   created() {
     this.fetchProfile();
@@ -60,9 +68,16 @@ export default {
     Reveal
   },
   methods: {
-    ...mapActions("User", ["fetchProfile"])
+    ...mapActions("User", ["fetchProfile", "logout"])
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.remove-underline {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 700;
+  margin-left: 10px;
+}
+</style>

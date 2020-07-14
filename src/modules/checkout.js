@@ -16,7 +16,10 @@ const mutations = {
 const actions = {
   createCharge: ({ commit, rootGetters }, data) => {
     commit("CHARGING");
-    if (rootGetters["User/getStatus"] === "Success") {
+    if (
+      rootGetters["User/getStatus"] === "Success" ||
+      rootGetters["User/getStatus"] === "Admin Success"
+    ) {
       axios
         .post(API.checkout.POST_TOKEN_API, data, {
           withCredentials: true

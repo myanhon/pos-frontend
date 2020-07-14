@@ -21,7 +21,9 @@
             <v-list-item v-for="(products, i) in getAllItems" :key="i">
               <v-list-item-content>
                 <v-list-item-title>
-                  <p class="pt-2">{{ products.item.name }}</p>
+                  <p class="pt-2">
+                    {{ products.item.name }} {{ products.item.size }}
+                  </p>
                 </v-list-item-title>
                 <v-list-item-subtitle>
                   <p>Qty: {{ products.qty }} Price: ${{ products.price }}</p>
@@ -133,6 +135,29 @@
                   </v-list-item-title>
                 </v-list-item>
               </v-list-item-content>
+              <v-list-item-content v-else-if="getStatus === 'Admin Success'">
+                <v-list-item
+                  v-for="(item, index) in loggedInAdmin"
+                  :key="index"
+                >
+                  <v-list-item-title>
+                    <router-link
+                      class="pointer"
+                      :to="item.url"
+                      @click="item.method()"
+                    >
+                      {{ item.title }}</router-link
+                    >
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <p class="pointer" @click="logout()">
+                      Logout
+                    </p>
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list-item-content>
               <v-list-item-content v-else>
                 <v-list-item v-for="(item, index) in notLoggedIn" :key="index">
                   <v-list-item-title>
@@ -160,6 +185,10 @@ export default {
   data: () => ({
     selectedComponent: "ColdDrinks",
     loggedIn: [{ title: "My Orders", url: "/profile" }],
+    loggedInAdmin: [
+      { title: "My Orders", url: "/profile" },
+      { title: "Dashboard", url: "/dashboard" }
+    ],
     notLoggedIn: [
       { title: "Login", url: "/login" },
       { title: "Register", url: "/register" }
