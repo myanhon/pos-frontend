@@ -80,8 +80,13 @@ const actions = {
         { withCredentials: true }
       )
       .then(response => {
-        _setTokens(response);
-        commit("AUTH_SUCCESS");
+        if (response.data.user.role === "admin") {
+          _setTokens(response);
+          commit("AUTH_SUCCESS_ADMIN", response.data.user);
+        } else {
+          _setTokens(response);
+          commit("AUTH_SUCCESS", response.data.user);
+        }
       })
       .catch(error => {
         commit("AUTH_ERROR");

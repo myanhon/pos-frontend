@@ -120,7 +120,7 @@ export default {
     return {
       dialog: false,
       search: null,
-      serverUrl: process.env.VUE_APP_API_URL || "http://localhost:3000",
+      serverUrl: process.env.VUE_APP_API_URL || "http://localhost:1000",
       dropdownCategory: [
         "Hot Drinks",
         "Cold Drinks",

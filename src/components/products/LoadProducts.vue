@@ -32,7 +32,7 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["products"],
   data: () => ({
-    serverUrl: process.env.VUE_APP_API_URL || "http://localhost:3000"
+    serverUrl: process.env.VUE_APP_API_URL || "http://localhost:1000"
   }),
   methods: {
     ...mapActions("Cart", ["addProductToCart"])
